@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "removeComments": true,
+        "sourceMap": true,
+        "outDir": "app/scripts.js",
+        "types": [
+            "chrome", "jquery"
+        ]
+    },
+    "include": [
+        "app/scripts.ts/*.ts"
+    ]
+}
