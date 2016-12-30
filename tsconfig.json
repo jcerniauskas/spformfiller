@@ -4,10 +4,10 @@
         "sourceMap": true,
         "outDir": "app/scripts.js",
         "types": [
-            "chrome", "jquery"
+            "chrome", "jquery", "jasmine"
         ]
     },
     "include": [
-        "app/scripts.ts/*.ts"
+        "app/scripts.ts/**/*.ts"
     ]
 }
