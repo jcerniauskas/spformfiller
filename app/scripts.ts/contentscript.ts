@@ -1,3 +1,5 @@
-import AlertService from "./AlertService";
+import { IAlertService, TYPES } from "./IAlertService";
+import kernel from "./inversify.config";
 
-AlertService.ShowAlert("This is a new alert");
+let service = kernel.get<IAlertService>(TYPES.IAlertService);
+service.ShowAlert("Custom");

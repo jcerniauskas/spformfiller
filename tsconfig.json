@@ -4,7 +4,12 @@
         "sourceMap": true,
         "outDir": "app/scripts.js",
         "types": [
-            "chrome", "jquery", "jasmine"
+            "chrome", "jquery", "jasmine", "reflect-metadata"
+        ],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "lib": [
+            "es6", "dom"
         ]
     },
     "include": [
