@@ -17,7 +17,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: 'scripts.ts/**/*.test.ts', included: true, watched: true },
+      { pattern: '../node_modules/reflect-metadata/Reflect.js', included: true, watched: false }, //this is necessary for InversifyJS DI container to work
+      { pattern: 'scripts.ts/**/*.test.ts', included: true, watched: true }
     ],
 
 

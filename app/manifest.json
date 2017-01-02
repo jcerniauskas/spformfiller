@@ -15,6 +15,7 @@
     ]
   },
   "permissions": [
+    "tabs",
     "activeTab"
   ],
   "options_ui": {

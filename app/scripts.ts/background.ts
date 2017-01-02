@@ -1,9 +1,13 @@
+import SPFormUrlMatcher from "./SPFormUrlMatcher/SPFormUrlMatcher";
+
 chrome.runtime.onInstalled.addListener(details => {
   console.log("previousVersion", details.previousVersion);
 });
 
-chrome.tabs.onUpdated.addListener(tabId => {
-  chrome.pageAction.show(tabId);
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (SPFormUrlMatcher.IsSPFormUrl(tab.url)) {
+    chrome.pageAction.show(tabId);
+  }
 });
 
 chrome.pageAction.onClicked.addListener(function(tab) {
