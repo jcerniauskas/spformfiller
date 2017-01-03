@@ -1,11 +1,14 @@
-import SPFormUrlMatcher from "./SPFormUrlMatcher/SPFormUrlMatcher";
+import { IPageVisibilityHandler } from "./PageVisibilityHandler/IPageVisibilityHandler";
+import kernel from "./inversify.config";
+
+let pageVisibilityHandler = kernel.get<IPageVisibilityHandler>("IPageVisibilityHandler");
 
 chrome.runtime.onInstalled.addListener(details => {
   console.log("previousVersion", details.previousVersion);
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (SPFormUrlMatcher.IsSPFormUrl(tab.url)) {
+  if (pageVisibilityHandler.ShouldShowPage({tabId, changeInfo, tab})) {
     chrome.pageAction.show(tabId);
   }
 });
