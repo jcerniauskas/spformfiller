@@ -1,7 +1,8 @@
 import { IPageVisibilityHandler } from "./PageVisibilityHandler/IPageVisibilityHandler";
-import kernel from "./inversify.config";
+import Container from "./versionedInversify.config";
 
-let pageVisibilityHandler = kernel.get<IPageVisibilityHandler>("IPageVisibilityHandler");
+Container.Initialize();
+let pageVisibilityHandler = Container.Current.get<IPageVisibilityHandler>("IPageVisibilityHandler");
 
 chrome.runtime.onInstalled.addListener(details => {
   console.log("previousVersion", details.previousVersion);
