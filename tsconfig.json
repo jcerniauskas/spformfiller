@@ -4,7 +4,7 @@
         "sourceMap": true,
         "outDir": "app/scripts.js",
         "types": [
-            "chrome", "jquery", "jasmine", "reflect-metadata"
+            "chrome", "jquery", "jasmine", "reflect-metadata", "sharepoint"
         ],
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,

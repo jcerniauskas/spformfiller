@@ -16,7 +16,7 @@ kernel2013.bind<IPageVisibilityHandler>("IPageVisibilityHandler").to(SPFormUrlMa
 versionMap[SPVersion.SP2013] = kernel2013;
 
 export default class ContainersForVersion {
-    static GetContainerForVersion(version: SPVersion): Container {
+    public static GetContainerForVersion(version: SPVersion): Container {
         return versionMap[version];
     }
 }
