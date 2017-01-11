@@ -2,8 +2,10 @@ export interface IFieldInfo {
     InternalName: string;
     Title: string;
     Id: string;
+    Hidden: boolean;
 }
 
 export interface IFieldInfoGatherer {
-    GetFieldInfos(): Promise<IFieldInfo[]>;
+    GetFieldInfo(): Promise<IFieldInfo[]>;
+    GetVisibleFieldInfo(): Promise<IFieldInfo[]>;
 }

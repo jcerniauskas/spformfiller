@@ -1,8 +1,13 @@
+import TestContainer from "../test/inversify.config";
 import SPFormUrlMatcher from "./SPFormUrlMatcher";
-import { IChromeChangeEventInfo } from "./IPageVisibilityHandler";
+import { IChromeChangeEventInfo, IPageVisibilityHandler } from "./IPageVisibilityHandler";
 
 describe("SPFormUrlMatcher", () => {
-    let formUrlMatcher = new SPFormUrlMatcher();
+    TestContainer.snapshot();
+
+    TestContainer.unbind("IPageVisibilityHandler");
+    TestContainer.bind<IPageVisibilityHandler>("IPageVisibilityHandler").to(SPFormUrlMatcher);
+    let formUrlMatcher = TestContainer.get<IPageVisibilityHandler>("IPageVisibilityHandler");
 
     let mockChromeChangeEvenInfo = function(url: string) { return <IChromeChangeEventInfo> {tabId: 0, changeInfo: null, tab: {url: url} } }
     let testUrl = function(url: string) { return formUrlMatcher.ShouldShowPage(mockChromeChangeEvenInfo(url)); }
@@ -25,5 +30,9 @@ describe("SPFormUrlMatcher", () => {
 
     it("should ignore 'DispForm' page", () => {
         expect(testUrl("https://affectolithuania.sharepoint.com/sites/cernijusdev/Documents/Forms/DispForm.aspx?ID=1")).toBe(false);
+    });
+
+    afterAll(() => {
+        TestContainer.restore();
     });
 });

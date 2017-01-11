@@ -1,26 +1,51 @@
 import { IFieldInfo, IFieldInfoGatherer } from "./IFieldInfo";
 import { injectable, inject } from "inversify";
-import { IPageContextInformation, IPageContextExtractor } from "../PageContextInformation/IPageContextInformation";
+import { ISPRestAPI } from "../SPRestAPI/ISPRestAPI";
+import { IContentTypeDeterminer, IContentTypeInformation } from "../ContentTypeDetermination/IContentTypeInfo";
 
 @injectable()
 export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
-    private _pageContextInformationGatherer: IPageContextExtractor;
-    private _pageContextInformation: IPageContextInformation;
-
-    public constructor(@inject("IPageContextExtractor") pageContextExtractor: IPageContextExtractor) {
-        this._pageContextInformationGatherer = pageContextExtractor;
-        this._pageContextInformation = this._pageContextInformationGatherer.GetPageContextInformation();
+    private _spRestAPI: ISPRestAPI;
+    private _contentTypeDeterminer: IContentTypeDeterminer;
+    
+    public constructor(@inject("ISPRestAPI") spRestAPI: ISPRestAPI, @inject("IContentTypeDeterminer") contentTypeDeterminer: IContentTypeDeterminer) {
+        this._spRestAPI = spRestAPI;
+        this._contentTypeDeterminer = contentTypeDeterminer;
     }
 
-    public async GetFieldInfos(): Promise<IFieldInfo[]> {
-        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, '') + "/_api/web/lists('" + this._pageContextInformation.ListId + "')/fields";
-        let queryResult: any = await $.ajax({
-            url: query,
-            async: false,
-            headers: { 'Accept': 'application/json;odata=verbose' },
-            type: 'GET',
-        });
+    private _cachedFieldInfo: Promise<IFieldInfo[]>;
+    private async GetCachedFieldInfo(): Promise<IFieldInfo[]> {
+        if (this._cachedFieldInfo === undefined) {
+            let listQueryResult = await this._spRestAPI.GetList();
+            let fieldsResult: any = undefined;
+            if (listQueryResult.ContentTypesEnabled) {
+                let contentTypeInformation = this._contentTypeDeterminer.GetContentTypeInformation();
 
-        return queryResult.map(fieldInfoResult => <IFieldInfo> { Id: fieldInfoResult.Id });
+            } else {
+                fieldsResult = await this._spRestAPI.GetListFields();
+            }
+
+            this._cachedFieldInfo = fieldsResult.value.map(
+                        fieldInfoResult => <IFieldInfo> {
+                            InternalName: fieldInfoResult.InternalName,
+                            Title: fieldInfoResult.Title,
+                            Id: fieldInfoResult.Id,
+                            Hidden: fieldInfoResult.Hidden
+                        }
+                    );
+        }
+
+        return this._cachedFieldInfo;
+    }
+
+    public async GetFieldInfo(): Promise<IFieldInfo[]> {
+        return await this.GetCachedFieldInfo();
+    }
+
+    public async GetVisibleFieldInfo(): Promise<IFieldInfo[]> {
+        let fieldInfo = await this.GetCachedFieldInfo();
+
+        return fieldInfo
+            .filter(fieldInfoResult => !fieldInfoResult.Hidden);
     }
 } 
