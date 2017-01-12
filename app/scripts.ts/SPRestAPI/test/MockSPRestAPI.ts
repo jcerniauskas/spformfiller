@@ -2,6 +2,7 @@ import { ISPRestAPI } from "../ISPRestAPI";
 import { injectable } from "inversify";
 import { FieldsMockReturnValue } from "./FieldsMockReturnValue";
 import { ListMockReturnValue } from "./ListMockResturnValue";
+import { ContentTypeFieldsMockReturnValue } from "./ContentTypeFieldsMockReturnValue";
 
 @injectable()
 export default class MockSPRestAPI implements ISPRestAPI {
@@ -11,11 +12,15 @@ export default class MockSPRestAPI implements ISPRestAPI {
         });
     }
 
+    public GetList(): Promise<any> {
+        return this.ReturnDelay(ListMockReturnValue);
+    }
+
     public GetListFields(): Promise<any> {
         return this.ReturnDelay(FieldsMockReturnValue);
     }
 
-    public GetList(): Promise<any> {
-        return this.ReturnDelay(ListMockReturnValue);
+    public GetListContentTypeFields(): Promise<any> {
+        return this.ReturnDelay(ContentTypeFieldsMockReturnValue);
     }
 }

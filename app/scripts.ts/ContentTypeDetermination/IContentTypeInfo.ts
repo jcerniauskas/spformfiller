@@ -4,5 +4,5 @@ export interface IContentTypeInformation {
 }
 
 export interface IContentTypeDeterminer {
-    GetContentTypeInformation(): IContentTypeInformation;
+    GetContentTypeInformation(): Promise<IContentTypeInformation>;
 }

@@ -23,6 +23,13 @@ export default class SPRestAPI implements ISPRestAPI {
         return queryResult;
     }
 
+    public async GetList(): Promise<any> {
+        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, '') + "/_api/web/lists('" + this._pageContextInformation.ListId + "')";
+        let queryResult: any = await this.ReturnGenericGetQueryResult(query);
+
+        return queryResult;
+    }
+
     public async GetListFields(): Promise<any> {
         let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, '') + "/_api/web/lists('" + this._pageContextInformation.ListId + "')/fields";
         let queryResult: any = await this.ReturnGenericGetQueryResult(query);
@@ -30,8 +37,8 @@ export default class SPRestAPI implements ISPRestAPI {
         return queryResult;
     }
 
-    public async GetList(): Promise<any> {
-        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, '') + "/_api/web/lists('" + this._pageContextInformation.ListId + "')";
+    public async GetListContentTypeFields(contentTypeId: string): Promise<any> {
+        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, '') + `/_api/web/lists('${this._pageContextInformation.ListId}')/ContentTypes('${contentTypeId}')/Fields`;
         let queryResult: any = await this.ReturnGenericGetQueryResult(query);
 
         return queryResult;

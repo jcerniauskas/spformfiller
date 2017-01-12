@@ -1,4 +1,5 @@
 export interface ISPRestAPI {
-    GetListFields(): Promise<any>;
     GetList(): Promise<any>;
+    GetListFields(): Promise<any>;
+    GetListContentTypeFields(contentTypeId: string): Promise<any>;
 }

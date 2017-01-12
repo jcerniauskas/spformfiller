@@ -16,26 +16,29 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
     private _cachedFieldInfo: Promise<IFieldInfo[]>;
     private async GetCachedFieldInfo(): Promise<IFieldInfo[]> {
         if (this._cachedFieldInfo === undefined) {
-            let listQueryResult = await this._spRestAPI.GetList();
-            let fieldsResult: any = undefined;
-            if (listQueryResult.ContentTypesEnabled) {
-                let contentTypeInformation = this._contentTypeDeterminer.GetContentTypeInformation();
-
-            } else {
-                fieldsResult = await this._spRestAPI.GetListFields();
-            }
-
-            this._cachedFieldInfo = fieldsResult.value.map(
-                        fieldInfoResult => <IFieldInfo> {
-                            InternalName: fieldInfoResult.InternalName,
-                            Title: fieldInfoResult.Title,
-                            Id: fieldInfoResult.Id,
-                            Hidden: fieldInfoResult.Hidden
-                        }
-                    );
+            this._cachedFieldInfo = this.LoadFields();
         }
 
         return this._cachedFieldInfo;
+    }
+    private async LoadFields(): Promise<IFieldInfo[]> {
+        let listQueryResult = await this._spRestAPI.GetList();
+        let fieldsResult: any = undefined;
+        if (listQueryResult.ContentTypesEnabled) {
+            let contentTypeInformation = await this._contentTypeDeterminer.GetContentTypeInformation();
+            fieldsResult = await this._spRestAPI.GetListContentTypeFields(contentTypeInformation.ContentTypeId);
+        } else {
+            fieldsResult = await this._spRestAPI.GetListFields();
+        }
+
+        return fieldsResult.value.map(
+                    fieldInfoResult => <IFieldInfo> {
+                        InternalName: fieldInfoResult.InternalName,
+                        Title: fieldInfoResult.Title,
+                        Id: fieldInfoResult.Id,
+                        Hidden: fieldInfoResult.Hidden
+                    }
+                );
     }
 
     public async GetFieldInfo(): Promise<IFieldInfo[]> {
