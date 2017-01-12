@@ -10,7 +10,7 @@ export default class PageContentTypeDeterminerByField implements IContentTypeDet
             if (selectedOption !== undefined && selectedOption !== null && selectedOption.length > 0) {
                 return <IContentTypeInformation> {
                     ContentTypeId: selectedOption.attr("value"),
-                    ContentTypeTitle: selectedOption.val()
+                    ContentTypeTitle: selectedOption.text()
                 };
             }
         }

@@ -17,7 +17,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: '../node_modules/reflect-metadata/Reflect.js', included: true, watched: false }, //this is necessary for InversifyJS DI container to work
+      { pattern: '../node_modules/reflect-metadata/Reflect.js', included: true, watched: false }, // this is necessary for InversifyJS DI container to work
+      { pattern: '../node_modules/jquery/dist/jquery.min.js', included: true, watched: false }, // this is necessary for jasmine-jquery fixtures in tests to work
+      { pattern: '../node_modules/jasmine-jquery/lib/jasmine-jquery.js', included: true, watched: false }, // this is necessary for jasmine-jquery fixtures in tests to work
+      { pattern: 'scripts.ts/test/FixtureSetup.ts', included: true, watched: true }, // this configures jasmine-jquery settings
+      { pattern: 'scripts.ts/**/*.html', included: false, watched: true }, // this includes actual fixtures
       { pattern: 'scripts.ts/**/*.test.ts', included: true, watched: true }
     ],
 
@@ -30,6 +34,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        "scripts.ts/test/FixtureSetup.ts": ["webpack"],
         "scripts.ts/**/*.test.ts": ["webpack"]
     },
 

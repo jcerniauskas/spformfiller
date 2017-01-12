@@ -5,9 +5,7 @@ import { IChromeChangeEventInfo, IPageVisibilityHandler } from "./IPageVisibilit
 describe("SPFormUrlMatcher", () => {
     TestContainer.snapshot();
 
-    TestContainer.unbind("IPageVisibilityHandler");
-    TestContainer.bind<IPageVisibilityHandler>("IPageVisibilityHandler").to(SPFormUrlMatcher);
-    let formUrlMatcher = TestContainer.get<IPageVisibilityHandler>("IPageVisibilityHandler");
+    let formUrlMatcher = TestContainer.bindAndGetSpecificInstance<IPageVisibilityHandler>("IPageVisibilityHandler", SPFormUrlMatcher);
 
     let mockChromeChangeEvenInfo = function(url: string) { return <IChromeChangeEventInfo> {tabId: 0, changeInfo: null, tab: {url: url} } }
     let testUrl = function(url: string) { return formUrlMatcher.ShouldShowPage(mockChromeChangeEvenInfo(url)); }
