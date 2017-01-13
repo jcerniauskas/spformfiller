@@ -11,12 +11,12 @@ describe("ListFieldInfoRestQuery", async () => {
         // load fixture for ContentTypeDeterminer to find some content type value
         let fixture = loadFixtures("ContentTypeDetermination/test/fixtures/CarunaDocumentFixture.html");
 
-        visibleFields = await listFieldInfoRestQuery.GetVisibleFieldInfo();
+        visibleFields = await listFieldInfoRestQuery.GetVisibleEditableFieldInfo();
         done();
     });
     
     it("should return 3 visible fields", async (done) => {
-        expect(visibleFields.length).toBe(3);
+        expect(visibleFields.length).toBe(1);
         done();
     })
 

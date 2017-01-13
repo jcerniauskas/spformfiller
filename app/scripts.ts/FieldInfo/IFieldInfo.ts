@@ -7,5 +7,5 @@ export interface IFieldInfo {
 
 export interface IFieldInfoGatherer {
     GetFieldInfo(): Promise<IFieldInfo[]>;
-    GetVisibleFieldInfo(): Promise<IFieldInfo[]>;
+    GetVisibleEditableFieldInfo(): Promise<IFieldInfo[]>;
 }

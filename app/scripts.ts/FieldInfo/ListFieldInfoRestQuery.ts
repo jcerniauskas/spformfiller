@@ -45,10 +45,14 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
         return await this.GetCachedFieldInfo();
     }
 
-    public async GetVisibleFieldInfo(): Promise<IFieldInfo[]> {
+    public async GetVisibleEditableFieldInfo(): Promise<IFieldInfo[]> {
+        const nonEditableFields = ["ContentType", "FileLeafRef", "Modified_x0020_By", "Created_x0020_By"];
+
         let fieldInfo = await this.GetCachedFieldInfo();
 
         return fieldInfo
-            .filter(fieldInfoResult => !fieldInfoResult.Hidden);
+            .filter(fieldInfoResult => !fieldInfoResult.Hidden) // exclude fields which are not even visible in the form
+            .filter(fieldInfoResult => nonEditableFields.indexOf(fieldInfoResult.InternalName) === -1) // exclude fields that are not editable through form UI
+            ;
     }
 } 
