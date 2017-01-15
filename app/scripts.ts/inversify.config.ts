@@ -12,6 +12,8 @@ import { IPageVisibilityHandler } from "./PageVisibilityHandler/IPageVisibilityH
 import SPFormUrlMatcher from "./PageVisibilityHandler/SPFormUrlMatcher";
 import { ISPRestAPI } from "./SPRestAPI/ISPRestAPI";
 import SPRestAPI from "./SPRestAPI/SPRestAPI";
+import { IFormFiller } from "./FormFiller/IFormFiller";
+import FormFiller from "./FormFiller/FormFiller";
 
 interface KernelVersionMap {
     [version: number]: Container;
@@ -25,6 +27,7 @@ kernel2013.bind<IFieldInfoGatherer>("IFieldInfoGatherer").to(ListFieldInfoRestQu
 kernel2013.bind<IPageContextExtractor>("IPageContextExtractor").to(SPPageContextInfo);
 kernel2013.bind<IPageVisibilityHandler>("IPageVisibilityHandler").to(SPFormUrlMatcher);
 kernel2013.bind<ISPRestAPI>("ISPRestAPI").to(SPRestAPI);
+kernel2013.bind<IFormFiller>("IFormFiller").to(FormFiller);
 
 versionMap[SPVersion.SP2013] = kernel2013;
 

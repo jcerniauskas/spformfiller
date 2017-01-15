@@ -8,7 +8,9 @@ interface ContainerForTesting extends interfaces.Container {
 export default class ContainerExtensions {
     public static ExtendContainer(container: interfaces.Container): ContainerForTesting {
         container["bindAndGetSpecificInstance"] = <T>(serviceIdentifier: string | symbol | interfaces.Newable<T>, constructor: new (...args: any[]) => T) => {
-            container.unbind(serviceIdentifier);
+            if (container.isBound(serviceIdentifier)) {
+                container.unbind(serviceIdentifier);
+            }
             container.bind<T>(serviceIdentifier).to(constructor);
             return container.get<T>(serviceIdentifier);
         };
