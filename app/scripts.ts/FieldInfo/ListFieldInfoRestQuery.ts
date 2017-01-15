@@ -7,7 +7,7 @@ import { IContentTypeDeterminer, IContentTypeInformation } from "../ContentTypeD
 export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
     private _spRestAPI: ISPRestAPI;
     private _contentTypeDeterminer: IContentTypeDeterminer;
-    
+
     public constructor(@inject("ISPRestAPI") spRestAPI: ISPRestAPI, @inject("IContentTypeDeterminer") contentTypeDeterminer: IContentTypeDeterminer) {
         this._spRestAPI = spRestAPI;
         this._contentTypeDeterminer = contentTypeDeterminer;
@@ -36,7 +36,8 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
                         InternalName: fieldInfoResult.InternalName,
                         Title: fieldInfoResult.Title,
                         Id: fieldInfoResult.Id,
-                        Hidden: fieldInfoResult.Hidden
+                        Hidden: fieldInfoResult.Hidden,
+                        Type: fieldInfoResult.TypeAsString
                     }
                 );
     }

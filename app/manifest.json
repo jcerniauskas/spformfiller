@@ -28,5 +28,9 @@
       "38": "images/icon-38.png"
     },
     "default_title": "SPFormFiller"
-  }
+  },
+  "web_accessible_resources": [
+    "scripts/injectionscript.js",
+    "scripts/vendor/jquery.min.js"
+  ]
 }

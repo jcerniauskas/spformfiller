@@ -20,18 +20,16 @@ export default class LoremIpsumTextProvider implements IValueProvider {
         return Promise.resolve(arrayOfWords.join(" "));
     }
 
-    static RandomIntFromInterval(min: number, max: number)
-    {
-        return Math.floor(Math.random()*(max - min + 1) + min);
+    static RandomIntFromInterval(min: number, max: number): number {
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    static RandomChoice<T>(array: T[]): T
-    {
+    static RandomChoice<T>(array: T[]): T {
         let randIndex = LoremIpsumTextProvider.RandomIntFromInterval(0, array.length - 1);
         return array[randIndex];
     };
 
-    static CapitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+    static CapitalizeFirstLetter(stringToCapitalize: string): string {
+        return stringToCapitalize.charAt(0).toUpperCase() + stringToCapitalize.slice(1);
     }
 }

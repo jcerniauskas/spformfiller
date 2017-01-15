@@ -6,7 +6,7 @@ import { IFieldInfo } from "../FieldInfo/IFieldInfo";
 describe("TextFieldValueWriter", () => {
     TestContainer.snapshot();
 
-    let textFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IValueWriter>("TextFieldValueWriterTest", TextFieldValueWriter);
+    let textFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IValueWriter>("IValueWriter", TextFieldValueWriter);
 
     it("should fill Title input with a specified value", () => {
         loadFixtures("ValueWriter/test/fixtures/FormWithTextInputField.html");

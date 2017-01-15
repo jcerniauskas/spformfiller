@@ -3,6 +3,7 @@ export interface IFieldInfo {
     Title: string;
     Id: string;
     Hidden: boolean;
+    Type: string;
 }
 
 export interface IFieldInfoGatherer {

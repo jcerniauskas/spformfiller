@@ -5,6 +5,7 @@ module.exports = {
         "background": "./app/scripts.ts/background.ts",
         "chromereload": "./app/scripts.ts/chromereload.ts",
         "contentscript": "./app/scripts.ts/contentscript.ts",
+        "injectionscript": "./app/scripts.ts/injectionscript.ts",
         "options": "./app/scripts.ts/options.ts",
         "popup": "./app/scripts.ts/popup.ts"
     },

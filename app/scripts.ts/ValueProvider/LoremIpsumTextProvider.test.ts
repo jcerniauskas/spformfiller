@@ -5,7 +5,7 @@ import LoremIpsumTextProvider from "./LoremIpsumTextProvider";
 describe("LoremIpsumTextProvider", () => {
    TestContainer.snapshot();
 
-   let loremIpsumTextProvider = TestContainer.bindAndGetSpecificInstance<IValueProvider>("LoremIpsumProviderTest", LoremIpsumTextProvider);
+   let loremIpsumTextProvider = TestContainer.bindAndGetSpecificInstance<IValueProvider>("IValueProvider", LoremIpsumTextProvider);
    let randomValues = new Array<string>(100).fill("");
 
    beforeAll(async (done) => {

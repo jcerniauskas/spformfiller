@@ -16,29 +16,32 @@ export default class SPRestAPI implements ISPRestAPI {
         let queryResult: any = await $.ajax({
             url: query,
             async: false,
-            headers: { 'Accept': 'application/json;odata=nometadata' },
-            type: 'GET',
+            headers: {
+                "Accept": "application/json;odata=nometadata",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            type: "GET",
         });
 
         return queryResult;
     }
 
     public async GetList(): Promise<any> {
-        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, '') + "/_api/web/lists('" + this._pageContextInformation.ListId + "')";
+        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + "/_api/web/lists('" + this._pageContextInformation.ListId + "')";
         let queryResult: any = await this.ReturnGenericGetQueryResult(query);
 
         return queryResult;
     }
 
     public async GetListFields(): Promise<any> {
-        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, '') + "/_api/web/lists('" + this._pageContextInformation.ListId + "')/fields";
+        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + "/_api/web/lists('" + this._pageContextInformation.ListId + "')/fields";
         let queryResult: any = await this.ReturnGenericGetQueryResult(query);
 
         return queryResult;
     }
 
     public async GetListContentTypeFields(contentTypeId: string): Promise<any> {
-        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, '') + `/_api/web/lists('${this._pageContextInformation.ListId}')/ContentTypes('${contentTypeId}')/Fields`;
+        let query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/lists('${this._pageContextInformation.ListId}')/ContentTypes('${contentTypeId}')/Fields`;
         let queryResult: any = await this.ReturnGenericGetQueryResult(query);
 
         return queryResult;
