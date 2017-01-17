@@ -4,10 +4,12 @@ import FormFiller from "./FormFiller";
 
 
 describe("FormFiller", () => {
-    let formFiller = TestContainer.bindAndGetSpecificInstance<IFormFiller>("IFormFiller", FormFiller);
+    // TODO: can't thing of any tests right now
 
-    it("should fill Title with random text", async (done) => {
+    // const formFiller = TestContainer.bindAndGetSpecificInstance<IFormFiller>("IFormFiller", FormFiller);
 
-        done();
-    })
+    // it("should fill Title with random text", async (done) => {
+
+    //     done();
+    // })
 });

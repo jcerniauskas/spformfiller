@@ -1,6 +1,7 @@
 import { IPageVisibilityHandler, IChromeChangeEventInfo } from "./IPageVisibilityHandler";
 import { injectable } from "inversify";
 
+// this class determines whether the current chrome tab URL matches SharePoint's EditForm or NewForm pages and whether the page action should be shown
 @injectable()
 export default class SPFormUrlMatcher implements IPageVisibilityHandler {
     public ShouldShowPage(changeEventInfo: IChromeChangeEventInfo): boolean {

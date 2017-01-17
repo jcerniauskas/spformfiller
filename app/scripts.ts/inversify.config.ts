@@ -23,9 +23,10 @@ interface KernelVersionMap {
     [version: number]: Container;
 }
 
-let versionMap: KernelVersionMap = { };
+// this will hold the mapping of versions to DI containers
+const versionMap: KernelVersionMap = { };
 
-let kernel2013 = new Container();
+const kernel2013 = new Container();
 kernel2013.bind<IContentTypeDeterminer>("IContentTypeDeterminer").to(PageContentTypeDeterminerByField).inSingletonScope();
 kernel2013.bind<IFieldInfoGatherer>("IFieldInfoGatherer").to(ListFieldInfoRestQuery).inSingletonScope();
 kernel2013.bind<IPageContextExtractor>("IPageContextExtractor").to(SPPageContextInfo).inSingletonScope();

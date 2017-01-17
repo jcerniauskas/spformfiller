@@ -3,6 +3,7 @@ import ContainersFromVersion from "./inversify.config";
 import VersionSelector from "./Versions/VersionSelector";
 import { Container } from "inversify";
 
+// this class returns an inversify container for the current version of SharePoint we're running against
 export default class VersionedContainer {
     public static Current: Container;
     public static CurrentVersion: SPVersion;

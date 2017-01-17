@@ -5,11 +5,11 @@ import ListFieldInfoRestQuery from "./ListFieldInfoRestQuery";
 describe("ListFieldInfoRestQuery", async () => {
     TestContainer.snapshot();
 
-    let listFieldInfoRestQuery = TestContainer.bindAndGetSpecificInstance<IFieldInfoGatherer>("IFieldInfoGatherer", ListFieldInfoRestQuery);
+    const listFieldInfoRestQuery = TestContainer.bindAndGetSpecificInstance<IFieldInfoGatherer>("IFieldInfoGatherer", ListFieldInfoRestQuery);
     let visibleFields: IFieldInfo[];
     beforeAll(async (done) => {
         // load fixture for ContentTypeDeterminer to find some content type value
-        let fixture = loadFixtures("ContentTypeDetermination/test/fixtures/CarunaDocumentFixture.html");
+        loadFixtures("ContentTypeDetermination/test/fixtures/CarunaDocumentFixture.html");
 
         visibleFields = await listFieldInfoRestQuery.GetVisibleEditableFieldInfo();
         done();

@@ -2,6 +2,7 @@ import { IValueWriter } from "./IValueWriter";
 import { IFieldInfo } from "../FieldInfo/IFieldInfo";
 import { injectable } from "inversify";
 
+// this class writes a value to a text field (which should be a simple input field)
 @injectable()
 export default class TextFieldValueWriter implements IValueWriter {
     public WriteValue(fieldInfo: IFieldInfo, value: any): void {

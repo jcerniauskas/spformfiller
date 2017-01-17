@@ -5,7 +5,7 @@ import PageContentTypeDeterminerByField from "./PageContentTypeDeterminerByField
 describe("PageContentTypeDeterminerByField", () => {
     TestContainer.snapshot();
 
-    let contentTypeDeterminerByField = TestContainer.bindAndGetSpecificInstance<IContentTypeDeterminer>(
+    const contentTypeDeterminerByField = TestContainer.bindAndGetSpecificInstance<IContentTypeDeterminer>(
         "IContentTypeDeterminer", PageContentTypeDeterminerByField);
 
     it("Should show 'Caruna Document' content type", async (done) => {

@@ -1,6 +1,7 @@
 import { IValueProvider } from "./IValueProvider";
 import { injectable } from "inversify";
 
+// this class returns a random sentence of 3 to 5 words for filling in small text fields
 @injectable()
 export default class LoremIpsumTextProvider implements IValueProvider {
     // a bunch of random Lorem Ipsum words
@@ -10,8 +11,8 @@ export default class LoremIpsumTextProvider implements IValueProvider {
 
     public GetRandomValue(): Promise<any> {
         // randomize 3 to 5 words
-        let numberOfWords = LoremIpsumTextProvider.RandomIntFromInterval(3, 5);
-        let arrayOfWords = new Array<string>(numberOfWords).fill("");
+        const numberOfWords = LoremIpsumTextProvider.RandomIntFromInterval(3, 5);
+        const arrayOfWords = new Array<string>(numberOfWords).fill("");
         for (let i in arrayOfWords) { arrayOfWords[i] = LoremIpsumTextProvider.RandomChoice(LoremIpsumTextProvider._loremIpsumValueArray); }
 
         // capitalize first word's first letter
@@ -25,7 +26,7 @@ export default class LoremIpsumTextProvider implements IValueProvider {
     }
 
     static RandomChoice<T>(array: T[]): T {
-        let randIndex = LoremIpsumTextProvider.RandomIntFromInterval(0, array.length - 1);
+        const randIndex = LoremIpsumTextProvider.RandomIntFromInterval(0, array.length - 1);
         return array[randIndex];
     };
 

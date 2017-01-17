@@ -1,16 +1,13 @@
 import { IPageContextInformation, IPageContextExtractor } from "./IPageContextInformation";
 import { injectable } from "inversify";
-import WindowVariables from "./WindowVariables";
 
+// this class gets page context information from _spPageContextInfo global page variable
 @injectable()
 export default class SPPageContextInfo implements IPageContextExtractor {
     public GetPageContextInformation(): IPageContextInformation {
-        //let windowVariables = WindowVariables.RetrieveWindowVariables(["_spPageContextInfo"]);
-        let windowVariables = { _spPageContextInfo: _spPageContextInfo };
-
         return <IPageContextInformation> {
-            WebServerRelativeUrl: windowVariables._spPageContextInfo.webServerRelativeUrl,
-            ListId: windowVariables._spPageContextInfo.pageListId
+            WebServerRelativeUrl: _spPageContextInfo.webServerRelativeUrl,
+            ListId: _spPageContextInfo.pageListId
         };
     }
 }

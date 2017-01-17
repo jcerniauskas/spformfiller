@@ -5,10 +5,10 @@ import { IChromeChangeEventInfo, IPageVisibilityHandler } from "./IPageVisibilit
 describe("SPFormUrlMatcher", () => {
     TestContainer.snapshot();
 
-    let formUrlMatcher = TestContainer.bindAndGetSpecificInstance<IPageVisibilityHandler>("IPageVisibilityHandler", SPFormUrlMatcher);
+    const formUrlMatcher = TestContainer.bindAndGetSpecificInstance<IPageVisibilityHandler>("IPageVisibilityHandler", SPFormUrlMatcher);
 
-    let mockChromeChangeEvenInfo = function(url: string) { return <IChromeChangeEventInfo> {tabId: 0, changeInfo: null, tab: {url: url} } }
-    let testUrl = function(url: string) { return formUrlMatcher.ShouldShowPage(mockChromeChangeEvenInfo(url)); }
+    const mockChromeChangeEvenInfo = function(url: string) { return <IChromeChangeEventInfo> {tabId: 0, changeInfo: null, tab: {url: url} } }
+    const testUrl = (url: string) => { return formUrlMatcher.ShouldShowPage(mockChromeChangeEvenInfo(url)); }
 
     it("should find 'EditForm' page", () => {
         expect(testUrl("https://affectolithuania.sharepoint.com/sites/cernijusdev/Documents/Forms/EditForm.aspx?ID=1")).toBe(true);

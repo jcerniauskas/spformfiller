@@ -4,6 +4,7 @@ import { IFieldInfo, IFieldInfoGatherer } from "../FieldInfo/IFieldInfo";
 import { IValueProvider } from "../ValueProvider/IValueProvider";
 import { IValueWriter } from "../ValueWriter/IValueWriter";
 
+// this class gets the fields for the form and uses the type-specific value providers and value writers for each field to fill them in 
 @injectable()
 export default class FormFiller implements IFormFiller {
     private _valueProviderFactory: (type: string) => IValueProvider;
@@ -21,13 +22,13 @@ export default class FormFiller implements IFormFiller {
     }
 
     public async FillFormFields(): Promise<void> {
-        let visibleEditableFields = await this._fieldInfoGatherer.GetVisibleEditableFieldInfo();
+        const visibleEditableFields = await this._fieldInfoGatherer.GetVisibleEditableFieldInfo();
         for (let fieldInfo of visibleEditableFields) {
-            let valueProvider = this._valueProviderFactory(fieldInfo.Type);
-            let valueWriter = this._valueWriterFactory(fieldInfo.Type);
+            const valueProvider = this._valueProviderFactory(fieldInfo.Type);
+            const valueWriter = this._valueWriterFactory(fieldInfo.Type);
 
-            if (valueProvider !== null && valueWriter !== null) {
-                let fieldValue = await valueProvider.GetRandomValue();
+            if (valueProvider && valueWriter) {
+                const fieldValue = await valueProvider.GetRandomValue();
                 valueWriter.WriteValue(fieldInfo, fieldValue);
             }
         }

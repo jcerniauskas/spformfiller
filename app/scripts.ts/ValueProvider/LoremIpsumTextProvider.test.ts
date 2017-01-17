@@ -5,8 +5,8 @@ import LoremIpsumTextProvider from "./LoremIpsumTextProvider";
 describe("LoremIpsumTextProvider", () => {
    TestContainer.snapshot();
 
-   let loremIpsumTextProvider = TestContainer.bindAndGetSpecificInstance<IValueProvider>("IValueProvider", LoremIpsumTextProvider);
-   let randomValues = new Array<string>(100).fill("");
+   const loremIpsumTextProvider = TestContainer.bindAndGetSpecificInstance<IValueProvider>("IValueProvider", LoremIpsumTextProvider);
+   const randomValues = new Array<string>(100).fill("");
 
    beforeAll(async (done) => {
        // try running this for 100 times to try out more random values

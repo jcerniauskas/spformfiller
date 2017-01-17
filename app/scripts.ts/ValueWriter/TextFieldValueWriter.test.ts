@@ -6,18 +6,18 @@ import { IFieldInfo } from "../FieldInfo/IFieldInfo";
 describe("TextFieldValueWriter", () => {
     TestContainer.snapshot();
 
-    let textFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IValueWriter>("IValueWriter", TextFieldValueWriter);
+    const textFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IValueWriter>("IValueWriter", TextFieldValueWriter);
 
     it("should fill Title input with a specified value", () => {
         loadFixtures("ValueWriter/test/fixtures/FormWithTextInputField.html");
-        let titleFieldInfo = <IFieldInfo> {
+        const titleFieldInfo = <IFieldInfo> {
                         InternalName: "Title",
                         Title: "Title",
                         Id: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
                         Hidden: false
                     };
 
-        let testValue = "This is a test value";
+        const testValue = "This is a test value";
         textFieldValueWriter.WriteValue(titleFieldInfo, testValue);
         expect($("[id='Title_fa564e0f-0c70-4ab9-b863-0177e6ddd247_$TextField']")).toHaveValue(testValue);
     });

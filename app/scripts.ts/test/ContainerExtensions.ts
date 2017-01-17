@@ -5,6 +5,7 @@ interface ContainerForTesting extends interfaces.Container {
     snapshotBindings(actionsDuringSnapshot: () => any): void;
 }
 
+// some extensions for inversify containers that help with writing tests
 export default class ContainerExtensions {
     public static ExtendContainer(container: interfaces.Container): ContainerForTesting {
         container["bindAndGetSpecificInstance"] = <T>(serviceIdentifier: string | symbol | interfaces.Newable<T>, constructor: new (...args: any[]) => T) => {
