@@ -1,4 +1,4 @@
-export const ContentTypeFieldsMockReturnValue = {
+export const ContentTypeFields = {
   "value": [
     {
       "AutoIndexed": false,

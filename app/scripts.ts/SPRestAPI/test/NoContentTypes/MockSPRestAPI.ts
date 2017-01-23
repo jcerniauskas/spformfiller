@@ -1,8 +1,7 @@
-import { ISPRestAPI } from "../ISPRestAPI";
+import { ISPRestAPI } from "../../ISPRestAPI";
 import { injectable } from "inversify";
-import { FieldsMockReturnValue } from "./FieldsMockReturnValue";
-import { ListMockReturnValue } from "./ListMockResturnValue";
-import { ContentTypeFieldsMockReturnValue } from "./ContentTypeFieldsMockReturnValue";
+import { ListFields } from "./ListFields";
+import { List } from "./List";
 
 @injectable()
 export default class MockSPRestAPI implements ISPRestAPI {
@@ -13,14 +12,14 @@ export default class MockSPRestAPI implements ISPRestAPI {
     }
 
     public GetList(): Promise<any> {
-        return this.ReturnDelay(ListMockReturnValue);
+        return this.ReturnDelay(List);
     }
 
     public GetListFields(): Promise<any> {
-        return this.ReturnDelay(FieldsMockReturnValue);
+        return this.ReturnDelay(ListFields);
     }
 
     public GetListContentTypeFields(): Promise<any> {
-        return this.ReturnDelay(ContentTypeFieldsMockReturnValue);
+        throw new Error("This list does not have content types enabled");
     }
 }

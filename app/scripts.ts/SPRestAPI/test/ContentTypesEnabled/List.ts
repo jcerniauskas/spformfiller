@@ -1,4 +1,4 @@
-export const ListMockReturnValue = {
+export const List = {
   "AllowContentTypes": true,
   "BaseTemplate": 101,
   "BaseType": 1,
