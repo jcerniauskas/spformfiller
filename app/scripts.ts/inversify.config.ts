@@ -14,10 +14,10 @@ import { ISPRestAPI } from "./SPRestAPI/ISPRestAPI";
 import SPRestAPI from "./SPRestAPI/SPRestAPI";
 import { IFormFiller } from "./FormFiller/IFormFiller";
 import FormFiller from "./FormFiller/FormFiller";
-import { IValueProvider } from "./ValueProvider/IValueProvider";
-import LoremIpsumTextProvider from "./ValueProvider/LoremIpsumTextProvider";
-import { IValueWriter } from "./ValueWriter/IValueWriter";
-import TextFieldValueWriter from "./ValueWriter/TextFieldValueWriter";
+import { IFieldValueProvider } from "./FieldValueProvider/IFieldValueProvider";
+import TextFieldRandomValueProvider from "./FieldValueProvider/TextFieldRandomValueProvider";
+import { IFieldValueWriter } from "./FieldValueWriter/IFieldValueWriter";
+import TextFieldValueWriter from "./FieldValueWriter/TextFieldValueWriter";
 
 interface KernelVersionMap {
     [version: number]: Container;
@@ -35,17 +35,17 @@ kernel2013.bind<ISPRestAPI>("ISPRestAPI").to(SPRestAPI).inSingletonScope();
 kernel2013.bind<IFormFiller>("IFormFiller").to(FormFiller).inSingletonScope();
 
 // bind value providers and value writers to their field types
-kernel2013.bind<IValueProvider>("IValueProvider").to(LoremIpsumTextProvider).inSingletonScope().whenTargetNamed("Text");
-kernel2013.bind<interfaces.Factory<IValueProvider>>("Factory<IValueProvider>").toFactory<IValueProvider>((context) => {
+kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(TextFieldRandomValueProvider).inSingletonScope().whenTargetNamed("Text");
+kernel2013.bind<interfaces.Factory<IFieldValueProvider>>("Factory<IFieldValueProvider>").toFactory<IFieldValueProvider>((context) => {
     return (type: string) => {
-        let typedProvider = context.container.getNamed<IValueProvider>("IValueProvider", type);
+        const typedProvider = context.container.getNamed<IFieldValueProvider>("IFieldValueProvider", type);
         return typedProvider;
     };
 });
-kernel2013.bind<IValueWriter>("IValueWriter").to(TextFieldValueWriter).inSingletonScope().whenTargetNamed("Text");
-kernel2013.bind<interfaces.Factory<IValueWriter>>("Factory<IValueWriter>").toFactory<IValueWriter>((context) => {
+kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(TextFieldValueWriter).inSingletonScope().whenTargetNamed("Text");
+kernel2013.bind<interfaces.Factory<IFieldValueWriter>>("Factory<IFieldValueWriter>").toFactory<IFieldValueWriter>((context) => {
     return (type: string) => {
-        let typedWriter = context.container.getNamed<IValueWriter>("IValueWriter", type);
+        const typedWriter = context.container.getNamed<IFieldValueWriter>("IFieldValueWriter", type);
         return typedWriter;
     };
 });

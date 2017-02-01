@@ -1,15 +1,15 @@
 import TestContainer from "../test/inversify.config";
-import { IValueWriter } from "./IValueWriter";
+import { IFieldValueWriter } from "./IFieldValueWriter";
 import TextFieldValueWriter from "./TextFieldValueWriter";
 import { IFieldInfo } from "../FieldInfo/IFieldInfo";
 
 describe("TextFieldValueWriter", () => {
     TestContainer.snapshot();
 
-    const textFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IValueWriter>("IValueWriter", TextFieldValueWriter);
+    const textFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IFieldValueWriter>("IFieldValueWriter", TextFieldValueWriter);
 
     it("should fill Title input with a specified value", () => {
-        loadFixtures("ValueWriter/test/fixtures/FormWithTextInputField.html");
+        loadFixtures("FieldValueWriter/test/fixtures/FormWithTextInputField.html");
         const titleFieldInfo = <IFieldInfo> {
                         InternalName: "Title",
                         Title: "Title",

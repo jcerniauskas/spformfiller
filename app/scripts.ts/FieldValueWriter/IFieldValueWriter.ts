@@ -1,5 +1,5 @@
 import { IFieldInfo } from "../FieldInfo/IFieldInfo";
 
-export interface IValueWriter {
+export interface IFieldValueWriter {
     WriteValue(fieldInfo: IFieldInfo, value: any): void;
 }

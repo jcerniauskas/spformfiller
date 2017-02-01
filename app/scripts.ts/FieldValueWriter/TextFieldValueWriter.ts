@@ -1,10 +1,10 @@
-import { IValueWriter } from "./IValueWriter";
+import { IFieldValueWriter } from "./IFieldValueWriter";
 import { IFieldInfo } from "../FieldInfo/IFieldInfo";
 import { injectable } from "inversify";
 
 // this class writes a value to a text field (which should be a simple input field)
 @injectable()
-export default class TextFieldValueWriter implements IValueWriter {
+export default class TextFieldValueWriter implements IFieldValueWriter {
     public WriteValue(fieldInfo: IFieldInfo, value: any): void {
         let inputField = $(`input[id^=${fieldInfo.InternalName}_${fieldInfo.Id.toLowerCase()}]`);
         if (inputField === null || inputField.length === 0) {

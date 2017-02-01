@@ -10,3 +10,7 @@ export interface IFieldInfoGatherer {
     GetFieldInfo(): Promise<IFieldInfo[]>;
     GetVisibleEditableFieldInfo(): Promise<IFieldInfo[]>;
 }
+
+export interface ITextFieldInfo extends IFieldInfo {
+    MaxLength: number;
+}
