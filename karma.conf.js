@@ -58,7 +58,10 @@ module.exports = function(config) {
           filename: null, // if no value is provided the sourcemap is inlined
           test: /\.(ts|js)($|\?)/i // process .js and .ts files only
         })
-      ]
+      ],
+      node: {
+        fs: 'empty'
+      }
     },
     webpackMiddleware: {
       noInfo: true
