@@ -4,6 +4,8 @@ export interface IFieldInfo {
     Id: string;
     Hidden: boolean;
     Type: string;
+    ReadOnlyField: boolean;
+    MaxLength?: number;
 }
 
 export interface IFieldInfoGatherer {
@@ -11,6 +13,6 @@ export interface IFieldInfoGatherer {
     GetVisibleEditableFieldInfo(): Promise<IFieldInfo[]>;
 }
 
-export interface ITextFieldInfo extends IFieldInfo {
-    MaxLength: number;
-}
+// export interface ITextFieldInfo extends IFieldInfo {
+//     MaxLength: number;
+// }

@@ -31,15 +31,19 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
             fieldsResult = await this._spRestAPI.GetListFields();
         }
 
-        return fieldsResult.value.map(
-                    fieldInfoResult => <IFieldInfo> {
+        return fieldsResult.value.map(fieldInfoResult => ListFieldInfoRestQuery.ConvertToFieldInfo(fieldInfoResult));
+    }
+
+    private static ConvertToFieldInfo(fieldInfoResult: any): IFieldInfo {
+        return <IFieldInfo> {
                         InternalName: fieldInfoResult.InternalName,
                         Title: fieldInfoResult.Title,
                         Id: fieldInfoResult.Id,
                         Hidden: fieldInfoResult.Hidden,
-                        Type: fieldInfoResult.TypeAsString
-                    }
-                );
+                        Type: fieldInfoResult.TypeAsString,
+                        ReadOnlyField: fieldInfoResult.ReadOnlyField,
+                        MaxLength: fieldInfoResult.MaxLength
+                    };
     }
 
     public GetFieldInfo(): Promise<IFieldInfo[]> {
@@ -48,12 +52,13 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
 
     public async GetVisibleEditableFieldInfo(): Promise<IFieldInfo[]> {
         // we don't want to inlude these fields because they are not actually editable
-        const nonEditableFields = ["ContentType", "FileLeafRef", "Modified_x0020_By", "Created_x0020_By"];
+        const nonEditableFields = ["ContentType", "FileLeafRef", "Modified_x0020_By", "Created_x0020_By", "_CopySource", "_UIVersionString"];
 
         const fieldInfo = await this.GetCachedFieldInfo();
 
         return fieldInfo
             .filter(fieldInfoResult => !fieldInfoResult.Hidden) // exclude fields which are not even visible in the form
+            .filter(fieldInfoResult => !fieldInfoResult.ReadOnlyField) // exclude read only fields
             .filter(fieldInfoResult => nonEditableFields.indexOf(fieldInfoResult.InternalName) === -1) // exclude fields that are not editable through form UI
             ;
     }

@@ -50,7 +50,7 @@ module.exports = function(config) {
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { test: /\.js$/, enforce: "pre", use: ["source-map-loader"] }
         ]
-    },
+      },
       plugins: [
         new webpack.SourceMapDevToolPlugin({
           filename: null, // if no value is provided the sourcemap is inlined
