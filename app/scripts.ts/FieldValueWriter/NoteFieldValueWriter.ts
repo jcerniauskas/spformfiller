@@ -4,16 +4,16 @@ import { injectable } from "inversify";
 
 // this class writes a value to a text field (which should be a simple input field)
 @injectable()
-export default class TextFieldValueWriter implements IFieldValueWriter {
+export default class NoteFieldValueWriter implements IFieldValueWriter {
     public WriteValue(fieldInfo: IFieldInfo, value: any): void {
-        const inputField = $(`input[id^=${fieldInfo.InternalName}_${fieldInfo.Id.toLowerCase()}]`);
-        if (inputField === null || inputField.length === 0) {
+        const textAreaField = $(`textarea[id^=${fieldInfo.InternalName}_${fieldInfo.Id.toLowerCase()}]`);
+        if (textAreaField === null || textAreaField.length === 0) {
             throw new Error("Cannot find field to fill with value");
         }
-        if (inputField.length > 1) {
+        if (textAreaField.length > 1) {
             throw new Error("More than one field found");
         }
 
-        inputField.val(value);
+        textAreaField.val(value);
     }
 }
