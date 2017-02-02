@@ -41,18 +41,16 @@ module.exports = function(config) {
     webpack: {
       devtool: 'source-map',
       resolve: {
-        extensions: ['', '.ts', '.js']
+        extensions: ['.ts', '.js']
       },
       module: {
-        loaders: [
+        rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.ts$/, loader: "awesome-typescript-loader" }
-        ],
-        preLoaders: [
+            { test: /\.ts$/, use: ["awesome-typescript-loader"] },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { test: /\.js$/, loader: "source-map-loader" },
+            { test: /\.js$/, enforce: "pre", use: ["source-map-loader"] }
         ]
-      },
+    },
       plugins: [
         new webpack.SourceMapDevToolPlugin({
           filename: null, // if no value is provided the sourcemap is inlined
