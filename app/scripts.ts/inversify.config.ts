@@ -14,10 +14,14 @@ import { ISPRestAPI } from "./SPRestAPI/ISPRestAPI";
 import SPRestAPI from "./SPRestAPI/SPRestAPI";
 import { IFormFiller } from "./FormFiller/IFormFiller";
 import FormFiller from "./FormFiller/FormFiller";
-import { IFieldValueProvider } from "./FieldValueProvider/IFieldValueProvider";
-import TextFieldRandomValueProvider from "./FieldValueProvider/TextFieldRandomValueProvider";
-import { IFieldValueWriter } from "./FieldValueWriter/IFieldValueWriter";
-import TextFieldValueWriter from "./FieldValueWriter/TextFieldValueWriter";
+import { IFieldValueProvider } from "./Providers/FieldValueProvider/IFieldValueProvider";
+import TextFieldRandomValueProvider from "./Providers/FieldValueProvider/TextFieldRandomValueProvider";
+import NoteFieldRandomValueProvider from "./Providers/FieldValueProvider/NoteFieldRandomValueProvider";
+import DateFieldRandomValueProvider from "./Providers/FieldValueProvider/DateFieldRandomValueProvider";
+import { IFieldValueWriter } from "./Providers/FieldValueWriter/IFieldValueWriter";
+import TextFieldValueWriter from "./Providers/FieldValueWriter/TextFieldValueWriter";
+import NoteFieldValueWriter from "./Providers/FieldValueWriter/NoteFieldValueWriter";
+import DateFieldValueWriter from "./Providers/FieldValueWriter/DateFieldValueWriter";
 
 interface KernelVersionMap {
     [version: number]: Container;
@@ -36,17 +40,29 @@ kernel2013.bind<IFormFiller>("IFormFiller").to(FormFiller).inSingletonScope();
 
 // bind value providers and value writers to their field types
 kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(TextFieldRandomValueProvider).inSingletonScope().whenTargetNamed("Text");
+kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(NoteFieldRandomValueProvider).inSingletonScope().whenTargetNamed("Note");
+kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(DateFieldRandomValueProvider).inSingletonScope().whenTargetNamed("DateTime");
 kernel2013.bind<interfaces.Factory<IFieldValueProvider>>("Factory<IFieldValueProvider>").toFactory<IFieldValueProvider>((context) => {
     return (type: string) => {
-        const typedProvider = context.container.getNamed<IFieldValueProvider>("IFieldValueProvider", type);
-        return typedProvider;
+        if (context.container.isBoundNamed("IFieldValueProvider", type)) {
+            const typedProvider = context.container.getNamed<IFieldValueProvider>("IFieldValueProvider", type);
+            return typedProvider;
+        } else {
+            return null;
+        }
     };
 });
 kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(TextFieldValueWriter).inSingletonScope().whenTargetNamed("Text");
+kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(NoteFieldValueWriter).inSingletonScope().whenTargetNamed("Note");
+kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(DateFieldValueWriter).inSingletonScope().whenTargetNamed("DateTime");
 kernel2013.bind<interfaces.Factory<IFieldValueWriter>>("Factory<IFieldValueWriter>").toFactory<IFieldValueWriter>((context) => {
     return (type: string) => {
-        const typedWriter = context.container.getNamed<IFieldValueWriter>("IFieldValueWriter", type);
-        return typedWriter;
+        if (context.container.isBoundNamed("IFieldValueWriter", type)) {
+            const typedWriter = context.container.getNamed<IFieldValueWriter>("IFieldValueWriter", type);
+            return typedWriter;
+        } else {
+            return null;
+        }
     };
 });
 

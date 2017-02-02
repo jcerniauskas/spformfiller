@@ -1,4 +1,4 @@
-import Random from "../Utils/Random";
+import Random from "../../Utils/Random";
 
 // this class returns a random sentence from a Lorem Ipsum text set using various constraints
 export default class LoremIpsumTextProvider {

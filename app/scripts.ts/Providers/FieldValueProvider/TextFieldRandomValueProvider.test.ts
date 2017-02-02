@@ -1,7 +1,6 @@
-import TestContainer from "../test/inversify.config";
+import TestContainer from "../../test/inversify.config";
 import { IFieldValueProvider } from "./IFieldValueProvider";
-import { IFieldValueWriter } from "./../FieldValueWriter/IFieldValueWriter";
-import { IFieldInfo, IFieldInfoGatherer } from './../FieldInfo/IFieldInfo';
+import { IFieldInfo, IFieldInfoGatherer } from './../../FieldInfo/IFieldInfo';
 import TextFieldRandomValueProvider from "./TextFieldRandomValueProvider";
 
 describe("TextFieldRandomValueProvider", () => {
@@ -19,7 +18,7 @@ describe("TextFieldRandomValueProvider", () => {
         done();
     });
 
-    it("should obey MaxLength property", async () => {
+    it("should obey MaxLength property", async (done) => {
         const fieldInfosWithMaxLength = textFieldInfos.filter(fieldInfo => fieldInfo.MaxLength);
         if (fieldInfosWithMaxLength.length && fieldInfosWithMaxLength.length < 1) {
             throw new Error("There are not enough text fields with MaxLength property for the test to run");
@@ -29,5 +28,7 @@ describe("TextFieldRandomValueProvider", () => {
             const randomValue: string = await textFieldValueProvider.GetRandomValue(fieldInfo);
             expect(randomValue.length).toBeLessThanOrEqual(fieldInfo.MaxLength);
         });
+
+        done();
     });
 });

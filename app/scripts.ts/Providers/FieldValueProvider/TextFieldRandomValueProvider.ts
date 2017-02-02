@@ -1,7 +1,6 @@
-import { IFieldInfo } from "./../FieldInfo/IFieldInfo";
+import { IFieldInfo } from "./../../FieldInfo/IFieldInfo";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { injectable } from "inversify";
-import Random from "../Utils/Random";
 import LoremIpsumTextProvider from "../RandomValueProvider/LoremIpsumTextProvider";
 
 // this class returns a random sentence of 3 to 5 words for filling in small text fields

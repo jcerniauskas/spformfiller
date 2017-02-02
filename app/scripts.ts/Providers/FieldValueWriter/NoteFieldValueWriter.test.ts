@@ -1,7 +1,7 @@
-import TestContainer from "../test/inversify.config";
+import TestContainer from "../../test/inversify.config";
 import { IFieldValueWriter } from "./IFieldValueWriter";
 import NoteFieldValueWriter from "./NoteFieldValueWriter";
-import { IFieldInfo } from "../FieldInfo/IFieldInfo";
+import { IFieldInfo } from "../../FieldInfo/IFieldInfo";
 
 describe("NoteFieldValueWriter", () => {
     TestContainer.snapshot();
@@ -9,7 +9,7 @@ describe("NoteFieldValueWriter", () => {
     const noteFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IFieldValueWriter>("IFieldValueWriter", NoteFieldValueWriter);
 
     it("should fill 'Describe more' field with a specified value", () => {
-        loadFixtures("FieldValueWriter/test/fixtures/FormWithAllFields.html");
+        loadFixtures("Providers/FieldValueWriter/test/fixtures/FormWithAllFields.html");
         const titleFieldInfo = <IFieldInfo> {
                         InternalName: "Describe_x0020_more",
                         Title: "Describe more",

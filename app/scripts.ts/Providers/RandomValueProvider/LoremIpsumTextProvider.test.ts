@@ -1,5 +1,5 @@
 import LoremIpsumTextProvider from "./LoremIpsumTextProvider";
-import Random from "../Utils/Random";
+import Random from "../../Utils/Random";
 
 describe("LoremIpsumTextProvider", () => {
    const fromWords = 3;

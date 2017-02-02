@@ -1,15 +1,15 @@
 import { IFormFiller } from "./IFormFiller";
 import { injectable, inject } from "inversify";
 import { IFieldInfo, IFieldInfoGatherer } from "../FieldInfo/IFieldInfo";
-import { IFieldValueProvider } from "../FieldValueProvider/IFieldValueProvider";
-import { IFieldValueWriter } from "../FieldValueWriter/IFieldValueWriter";
+import { IFieldValueProvider } from "../Providers/FieldValueProvider/IFieldValueProvider";
+import { IFieldValueWriter } from "../Providers/FieldValueWriter/IFieldValueWriter";
 
 // this class gets the fields for the form and uses the type-specific value providers and value writers for each field to fill them in 
 @injectable()
 export default class FormFiller implements IFormFiller {
     public constructor(
-        @inject("Factory<IValueProvider>") private _valueProviderFactory: (type: string) => IFieldValueProvider,
-        @inject("Factory<IValueWriter>") private _valueWriterFactory: (type: string) => IFieldValueWriter,
+        @inject("Factory<IFieldValueProvider>") private _valueProviderFactory: (type: string) => IFieldValueProvider,
+        @inject("Factory<IFieldValueWriter>") private _valueWriterFactory: (type: string) => IFieldValueWriter,
         @inject("IFieldInfoGatherer") private _fieldInfoGatherer: IFieldInfoGatherer
     ) {
 

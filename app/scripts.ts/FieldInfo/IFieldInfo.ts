@@ -6,6 +6,7 @@ export interface IFieldInfo {
     Type: string;
     ReadOnlyField: boolean;
     MaxLength?: number;
+    DisplayFormat?: number;
 }
 
 export interface IFieldInfoGatherer {

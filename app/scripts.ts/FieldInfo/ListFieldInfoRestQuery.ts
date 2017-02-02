@@ -42,7 +42,8 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
                         Hidden: fieldInfoResult.Hidden,
                         Type: fieldInfoResult.TypeAsString,
                         ReadOnlyField: fieldInfoResult.ReadOnlyField,
-                        MaxLength: fieldInfoResult.MaxLength
+                        MaxLength: fieldInfoResult.MaxLength,
+                        DisplayFormat: fieldInfoResult.DisplayFormat
                     };
     }
 

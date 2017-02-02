@@ -1,4 +1,4 @@
-import Random from "../Utils/Random";
+import Random from "../../Utils/Random";
 
 // this class returns a random date based on various constraints
 export default class RandomDateProvider {
