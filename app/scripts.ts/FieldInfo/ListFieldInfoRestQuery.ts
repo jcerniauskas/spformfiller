@@ -6,12 +6,7 @@ import { IContentTypeDeterminer, IContentTypeInformation } from "../ContentTypeD
 // this component gets the field information for the form and should be able to return the information about fields which need to be filled in
 @injectable()
 export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
-    private _spRestAPI: ISPRestAPI;
-    private _contentTypeDeterminer: IContentTypeDeterminer;
-
-    public constructor(@inject("ISPRestAPI") spRestAPI: ISPRestAPI, @inject("IContentTypeDeterminer") contentTypeDeterminer: IContentTypeDeterminer) {
-        this._spRestAPI = spRestAPI;
-        this._contentTypeDeterminer = contentTypeDeterminer;
+    public constructor(@inject("ISPRestAPI") private _spRestAPI: ISPRestAPI, @inject("IContentTypeDeterminer") private _contentTypeDeterminer: IContentTypeDeterminer) {
     }
 
     // we will use a promise to cache field info

@@ -5,11 +5,9 @@ import { IPageContextInformation, IPageContextExtractor } from "../PageContextIn
 // this is a proxy class for some of the SharePoint's REST API methods
 @injectable()
 export default class SPRestAPI implements ISPRestAPI {
-    private _pageContextInformationGatherer: IPageContextExtractor;
     private _pageContextInformation: IPageContextInformation;
 
-    public constructor(@inject("IPageContextExtractor") pageContextExtractor: IPageContextExtractor) {
-        this._pageContextInformationGatherer = pageContextExtractor;
+    public constructor(@inject("IPageContextExtractor") private _pageContextInformationGatherer: IPageContextExtractor) {
         this._pageContextInformation = this._pageContextInformationGatherer.GetPageContextInformation();
     }
 
