@@ -16,7 +16,7 @@ export default class DateFieldValueWriter implements IFieldValueWriter {
 
         const dateValue = <Date>value;
         // TODO: test for regional settings effect
-        const formattedValue = `${dateValue.getMonth()}/${dateValue.getDate()}/${dateValue.getFullYear()}`;
+        const formattedValue = `${dateValue.getMonth() + 1}/${dateValue.getDate()}/${dateValue.getFullYear()}`;
         dateInputField.val(formattedValue);
 
         // check if this is a Date + Time field
