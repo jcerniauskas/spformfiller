@@ -1,17 +1,17 @@
 import TestContainer from "../../test/inversify.config";
 import { IFieldValueProvider } from "./IFieldValueProvider";
-import { IFieldInfo, IFieldInfoGatherer } from './../../FieldInfo/IFieldInfo';
+import { IFieldInfo, ITextFieldInfo, IFieldInfoGatherer } from './../../FieldInfo/IFieldInfo';
 import TextFieldRandomValueProvider from "./TextFieldRandomValueProvider";
 
 describe("TextFieldRandomValueProvider", () => {
-    let textFieldInfos: IFieldInfo[];
+    let textFieldInfos: ITextFieldInfo[];
 
     const fieldInfoGatherer = TestContainer.get<IFieldInfoGatherer>("IFieldInfoGatherer");
     const textFieldValueProvider = TestContainer.bindAndGetSpecificInstance<IFieldValueProvider>("IFieldValueProvider", TextFieldRandomValueProvider);
 
     beforeAll(async (done) => {
         const fieldInfos = await fieldInfoGatherer.GetVisibleEditableFieldInfo();
-        textFieldInfos = fieldInfos.filter(fieldInfo => fieldInfo.Type === "Text");
+        textFieldInfos = <ITextFieldInfo[]>fieldInfos.filter(fieldInfo => fieldInfo.Type === "Text");
         if (textFieldInfos.length && textFieldInfos.length < 1) {
             throw new Error("There are not enough text fields for the test to run");
         }

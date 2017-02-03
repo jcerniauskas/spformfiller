@@ -5,8 +5,6 @@ export interface IFieldInfo {
     Hidden: boolean;
     Type: string;
     ReadOnlyField: boolean;
-    MaxLength?: number;
-    DisplayFormat?: number;
 }
 
 export interface IFieldInfoGatherer {
@@ -14,6 +12,18 @@ export interface IFieldInfoGatherer {
     GetVisibleEditableFieldInfo(): Promise<IFieldInfo[]>;
 }
 
-// export interface ITextFieldInfo extends IFieldInfo {
-//     MaxLength: number;
-// }
+export interface ITextFieldInfo extends IFieldInfo {
+    MaxLength: number;
+}
+
+export enum DateFormat {
+    DateOnly,
+    DateAndTime
+}
+export interface IDateFieldInfo extends IFieldInfo {
+    DateFormat: DateFormat;
+}
+
+export interface IChoiceFieldInfo extends IFieldInfo {
+    Choices: string[];
+}

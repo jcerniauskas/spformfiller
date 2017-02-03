@@ -1,4 +1,4 @@
-import { IFieldInfo } from "./../../FieldInfo/IFieldInfo";
+import { IFieldInfo, ITextFieldInfo } from "./../../FieldInfo/IFieldInfo";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { injectable } from "inversify";
 import LoremIpsumTextProvider from "../RandomValueProvider/LoremIpsumTextProvider";
@@ -6,7 +6,7 @@ import LoremIpsumTextProvider from "../RandomValueProvider/LoremIpsumTextProvide
 // this class returns a random sentence of 3 to 5 words for filling in small text fields
 @injectable()
 export default class TextFieldRandomValueProvider implements IFieldValueProvider {
-    public async GetRandomValue(fieldInfo: IFieldInfo): Promise<any> {
+    public async GetRandomValue(fieldInfo: ITextFieldInfo): Promise<any> {
         const randomSentence: string = await LoremIpsumTextProvider.GetRandomSentence(3, 5);
 
         if (fieldInfo.MaxLength) {

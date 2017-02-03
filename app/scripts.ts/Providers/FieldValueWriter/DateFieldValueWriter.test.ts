@@ -1,7 +1,7 @@
 import TestContainer from "../../test/inversify.config";
 import { IFieldValueWriter } from "./IFieldValueWriter";
 import DateFieldValueWriter from "./DateFieldValueWriter";
-import { IFieldInfo } from "../../FieldInfo/IFieldInfo";
+import { IFieldInfo, IDateFieldInfo, DateFormat } from "../../FieldInfo/IFieldInfo";
 
 describe("DateFieldValueWriter", () => {
     TestContainer.snapshot();
@@ -11,12 +11,12 @@ describe("DateFieldValueWriter", () => {
 
     it("should fill date field with date value", () => {
         loadFixtures("Providers/FieldValueWriter/test/fixtures/FormWithAllFields.html");
-        const dateFieldInfo = <IFieldInfo> {
+        const dateFieldInfo = <IDateFieldInfo> {
                         InternalName: "SPF_x0020_Date",
                         Title: "SPF Date",
                         Id: "745b568b-f30f-4f21-b913-61a2adbe2e94",
                         Hidden: false,
-                        DisplayFormat: 0
+                        DateFormat: DateFormat.DateOnly,
                     };
 
         dateFieldValueWriter.WriteValue(dateFieldInfo, testDate);
@@ -26,12 +26,12 @@ describe("DateFieldValueWriter", () => {
 
     it("should fill date and time field with date value and a time value", () => {
         loadFixtures("Providers/FieldValueWriter/test/fixtures/FormWithAllFields.html");
-        const dateAndTimeFieldInfo = <IFieldInfo> {
+        const dateAndTimeFieldInfo = <IDateFieldInfo> {
                         InternalName: "SPF_x0020_Date_x0020_time",
                         Title: "SPF Date time",
                         Id: "dfa5fdf4-a2ac-48db-8b0b-987dfedc4ade",
                         Hidden: false,
-                        DisplayFormat: 1
+                        DateFormat: DateFormat.DateAndTime,
                     };
 
         dateFieldValueWriter.WriteValue(dateAndTimeFieldInfo, testDate);

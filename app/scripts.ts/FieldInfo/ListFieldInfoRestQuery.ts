@@ -2,6 +2,7 @@ import { IFieldInfo, IFieldInfoGatherer } from "./IFieldInfo";
 import { injectable, inject } from "inversify";
 import { ISPRestAPI } from "../SPRestAPI/ISPRestAPI";
 import { IContentTypeDeterminer, IContentTypeInformation } from "../ContentTypeDetermination/IContentTypeInfo";
+import FieldInfoConverter from "./FieldInfoConverter";
 
 // this component gets the field information for the form and should be able to return the information about fields which need to be filled in
 @injectable()
@@ -31,20 +32,7 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
             fieldsResult = await this._spRestAPI.GetListFields();
         }
 
-        return fieldsResult.value.map(fieldInfoResult => ListFieldInfoRestQuery.ConvertToFieldInfo(fieldInfoResult));
-    }
-
-    private static ConvertToFieldInfo(fieldInfoResult: any): IFieldInfo {
-        return <IFieldInfo> {
-                        InternalName: fieldInfoResult.InternalName,
-                        Title: fieldInfoResult.Title,
-                        Id: fieldInfoResult.Id,
-                        Hidden: fieldInfoResult.Hidden,
-                        Type: fieldInfoResult.TypeAsString,
-                        ReadOnlyField: fieldInfoResult.ReadOnlyField,
-                        MaxLength: fieldInfoResult.MaxLength,
-                        DisplayFormat: fieldInfoResult.DisplayFormat
-                    };
+        return fieldsResult.value.map(fieldInfoResult => FieldInfoConverter.ConvertToIFieldInfo(fieldInfoResult));
     }
 
     public GetFieldInfo(): Promise<IFieldInfo[]> {
