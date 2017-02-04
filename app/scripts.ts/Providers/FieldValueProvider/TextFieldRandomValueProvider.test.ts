@@ -4,6 +4,8 @@ import { IFieldInfo, ITextFieldInfo, IFieldInfoGatherer } from './../../FieldInf
 import TextFieldRandomValueProvider from "./TextFieldRandomValueProvider";
 
 describe("TextFieldRandomValueProvider", () => {
+    TestContainer.snapshot();
+
     let textFieldInfos: ITextFieldInfo[];
 
     const fieldInfoGatherer = TestContainer.get<IFieldInfoGatherer>("IFieldInfoGatherer");
@@ -30,5 +32,9 @@ describe("TextFieldRandomValueProvider", () => {
         });
 
         done();
+    });
+
+    afterAll(() => {
+        TestContainer.restore();
     });
 });

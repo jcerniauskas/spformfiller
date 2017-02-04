@@ -9,7 +9,7 @@ export abstract class FieldValueWriterBase implements IFieldValueWriter {
     protected GetInputControl(selector: string): JQuery {
         const inputControl = $(selector);
         this.ThrowErrorIfNoElement(inputControl, "Cannot find field to fill with value");
-        
+
         if (inputControl.length > 1) {
             throw new Error("More than one field found");
         }

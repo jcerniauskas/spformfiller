@@ -4,6 +4,8 @@ import { IFieldInfo, IDateFieldInfo, DateFormat } from "./../../FieldInfo/IField
 import DateFieldRandomValueProvider from "./DateFieldRandomValueProvider";
 
 describe("DateFieldRandomValueProvider", () => {
+    TestContainer.snapshot();
+
     const randomValues = new Array<Date>(100).fill(new Date(1970, 0, 1));
 
     const dateFieldValueProvider = TestContainer.bindAndGetSpecificInstance<IFieldValueProvider>("IFieldValueProvider", DateFieldRandomValueProvider);
@@ -27,5 +29,9 @@ describe("DateFieldRandomValueProvider", () => {
         for (let randomDate of randomValues) {
             expect(randomDate.getMinutes() % 5).toEqual(0); 
         }
+    });
+
+    afterAll(() => {
+        TestContainer.restore();
     });
 });

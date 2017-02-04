@@ -5,6 +5,7 @@ export interface IFieldInfo {
     Hidden: boolean;
     Type: string;
     ReadOnlyField: boolean;
+    SharePointTypeAsString: string;
 }
 
 export interface IFieldInfoGatherer {
@@ -34,4 +35,9 @@ export interface IChoiceFieldInfo extends IFieldInfo {
     FillInChoice: boolean;
     ChoiceFormat: ChoiceFormat;
     Choices: string[];
+}
+
+export interface INumberFieldInfo extends IFieldInfo {
+    MinValue: number;
+    MaxValue: number;
 }
