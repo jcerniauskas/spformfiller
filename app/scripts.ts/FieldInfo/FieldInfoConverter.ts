@@ -1,4 +1,4 @@
-import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, DateFormat } from "./IFieldInfo";
+import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, DateFormat, ChoiceFormat } from "./IFieldInfo";
 
 export default class FieldInfoConverter {
     public static ConvertToIFieldInfo(fieldInfoResultFromRestAPI: any): IFieldInfo {
@@ -23,9 +23,15 @@ export default class FieldInfoConverter {
             return dateFieldInfo;
         }
 
-        if (baseFieldInfo.Type === "Choice") {
+        if (baseFieldInfo.Type === "Choice" || baseFieldInfo.Type === "MultiChoice") {
             let choiceFieldInfo = <IChoiceFieldInfo> baseFieldInfo;
+            choiceFieldInfo.FillInChoice = fieldInfoResultFromRestAPI.FillInChoice;
             choiceFieldInfo.Choices = fieldInfoResultFromRestAPI.Choices;
+            if (baseFieldInfo.Type === "MultiChoice") {
+                choiceFieldInfo.ChoiceFormat = ChoiceFormat.CheckBoxes;
+            } else {
+                choiceFieldInfo.ChoiceFormat = fieldInfoResultFromRestAPI.EditFormat === 1 ? ChoiceFormat.Radio : ChoiceFormat.DropDown;
+            }
             return choiceFieldInfo;
         }
 

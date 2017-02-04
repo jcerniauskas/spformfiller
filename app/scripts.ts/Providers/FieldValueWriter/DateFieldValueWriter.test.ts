@@ -6,7 +6,7 @@ import { IFieldInfo, IDateFieldInfo, DateFormat } from "../../FieldInfo/IFieldIn
 describe("DateFieldValueWriter", () => {
     TestContainer.snapshot();
 
-    const testDate = new Date(2017, 2, 11, 18, 5, 58, 187);
+    const testDate = new Date(2017, 1, 11, 18, 5, 58, 187);
     const dateFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IFieldValueWriter>("IFieldValueWriter", DateFieldValueWriter);
 
     it("should fill date field with date value", () => {

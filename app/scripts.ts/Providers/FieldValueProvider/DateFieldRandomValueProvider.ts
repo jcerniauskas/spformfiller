@@ -3,7 +3,7 @@ import { IFieldValueProvider } from "./IFieldValueProvider";
 import { injectable } from "inversify";
 import RandomDateProvider from "../RandomValueProvider/RandomDateProvider";
 
-// this class returns a random sentence of 3 to 5 words for filling in small text fields
+// this class returns a random date rounded to 5 minutes (you can only select time in 5 minute increments in SharePoint)
 @injectable()
 export default class DateFieldRandomValueProvider implements IFieldValueProvider {
     public async GetRandomValue(fieldInfo: IFieldInfo): Promise<any> {

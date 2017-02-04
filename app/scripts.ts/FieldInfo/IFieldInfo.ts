@@ -24,6 +24,14 @@ export interface IDateFieldInfo extends IFieldInfo {
     DateFormat: DateFormat;
 }
 
+export enum ChoiceFormat {
+    DropDown,
+    Radio,
+    CheckBoxes,
+}
+
 export interface IChoiceFieldInfo extends IFieldInfo {
+    FillInChoice: boolean;
+    ChoiceFormat: ChoiceFormat;
     Choices: string[];
 }

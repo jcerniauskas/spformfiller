@@ -1,18 +1,13 @@
 import { IFieldValueWriter } from "./IFieldValueWriter";
 import { IFieldInfo, IDateFieldInfo, DateFormat } from "../../FieldInfo/IFieldInfo";
 import { injectable } from "inversify";
+import { FieldValueWriterBase } from "./FieldValueWriterBase";
 
 // this class writes a value to a date field
 @injectable()
-export default class DateFieldValueWriter implements IFieldValueWriter {
+export default class DateFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: IDateFieldInfo, value: any): void {
-        const dateInputField = $(`input[id='${fieldInfo.InternalName}_${fieldInfo.Id.toLowerCase()}_$DateTimeFieldDate']`);
-        if (dateInputField === null || dateInputField.length === 0) {
-            throw new Error("Cannot find field to fill with value");
-        }
-        if (dateInputField.length > 1) {
-            throw new Error("More than one field found");
-        }
+        const dateInputField = super.GetInputControlForField(fieldInfo, "input", "$DateTimeFieldDate");
 
         const dateValue = <Date>value;
         // TODO: test for regional settings effect
@@ -22,11 +17,11 @@ export default class DateFieldValueWriter implements IFieldValueWriter {
         // check if this is a Date + Time field
         if (fieldInfo.DateFormat === DateFormat.DateAndTime) {
             // in this case we must also update the hour and minute values
-            const hourSelectField = $(`select[id='${fieldInfo.InternalName}_${fieldInfo.Id.toLowerCase()}_$DateTimeFieldDateHours']`);
+            const hourSelectField = super.GetInputControlForField(fieldInfo, "select", "$DateTimeFieldDateHours");
             // TODO: test for regional settings effect
             hourSelectField.val(dateValue.getHours());
 
-            const minutesSelectField = $(`select[id='${fieldInfo.InternalName}_${fieldInfo.Id.toLowerCase()}_$DateTimeFieldDateMinutes']`);
+            const minutesSelectField = super.GetInputControlForField(fieldInfo, "select", "$DateTimeFieldDateMinutes");
             minutesSelectField.val(DateFieldValueWriter.PadZero(dateValue.getMinutes()));
         }
     }
