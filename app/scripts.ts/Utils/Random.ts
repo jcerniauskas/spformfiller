@@ -5,7 +5,7 @@ export default class Random {
     }
 
     public static RandomChoice<T>(array: T[]): T {
-        if(!array) {
+        if (!array) {
             throw new Error("Array is undefined");
         }
 
