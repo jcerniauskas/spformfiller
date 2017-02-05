@@ -1,3 +1,4 @@
+import { injectable } from "inversify";
 import { Term, IManagedMetadataService } from "./IManagedMetadataService";
 
 interface TermFromAPI extends Term {
@@ -8,6 +9,7 @@ interface TermPromises {
     [termsetId: string]: Promise<TermFromAPI[]>;
 }
 
+@injectable()
 export default class ManagedMetadataService implements IManagedMetadataService {
     private LoadedTerms: TermPromises = { };
 
