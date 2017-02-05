@@ -14,18 +14,23 @@ import { ISPRestAPI } from "./SPRestAPI/ISPRestAPI";
 import SPRestAPI from "./SPRestAPI/SPRestAPI";
 import { IFormFiller } from "./FormFiller/IFormFiller";
 import FormFiller from "./FormFiller/FormFiller";
+import { IManagedMetadataService } from "./Services/IManagedMetadataService";
+import ManagedMetadataService from "./Services/ManagedMetadataService";
+
 import { IFieldValueProvider } from "./Providers/FieldValueProvider/IFieldValueProvider";
 import TextFieldRandomValueProvider from "./Providers/FieldValueProvider/TextFieldRandomValueProvider";
 import NoteFieldRandomValueProvider from "./Providers/FieldValueProvider/NoteFieldRandomValueProvider";
 import DateFieldRandomValueProvider from "./Providers/FieldValueProvider/DateFieldRandomValueProvider";
 import ChoiceFieldRandomValueProvider from "./Providers/FieldValueProvider/ChoiceFieldRandomValueProvider";
 import NumberFieldRandomValueProvider from "./Providers/FieldValueProvider/NumberFieldRandomValueProvider";
+import ManagedMetadataFieldRandomValueProvider from "./Providers/FieldValueProvider/ManagedMetadataFieldRandomValueProvider";
 import { IFieldValueWriter } from "./Providers/FieldValueWriter/IFieldValueWriter";
 import TextFieldValueWriter from "./Providers/FieldValueWriter/TextFieldValueWriter";
 import NoteFieldValueWriter from "./Providers/FieldValueWriter/NoteFieldValueWriter";
 import DateFieldValueWriter from "./Providers/FieldValueWriter/DateFieldValueWriter";
 import ChoiceFieldValueWriter from "./Providers/FieldValueWriter/ChoiceFieldValueWriter";
 import NumberFieldValueWriter from "./Providers/FieldValueWriter/NumberFieldValueWriter";
+import ManagedMetadataFieldValueWriter from "./Providers/FieldValueWriter/ManagedMetadataFieldValueWriter";
 
 interface KernelVersionMap {
     [version: number]: Container;
@@ -41,6 +46,7 @@ kernel2013.bind<IPageContextExtractor>("IPageContextExtractor").to(SPPageContext
 kernel2013.bind<IPageVisibilityHandler>("IPageVisibilityHandler").to(SPFormUrlMatcher).inSingletonScope();
 kernel2013.bind<ISPRestAPI>("ISPRestAPI").to(SPRestAPI).inSingletonScope();
 kernel2013.bind<IFormFiller>("IFormFiller").to(FormFiller).inSingletonScope();
+kernel2013.bind<IManagedMetadataService>("IManagedMetadataService").to(ManagedMetadataService).inSingletonScope();
 
 // bind value providers and value writers to their field types
 kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(TextFieldRandomValueProvider).inSingletonScope().whenTargetNamed("Text");
@@ -48,6 +54,7 @@ kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(NoteFieldRandomVa
 kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(DateFieldRandomValueProvider).inSingletonScope().whenTargetNamed("DateTime");
 kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(ChoiceFieldRandomValueProvider).inSingletonScope().whenTargetNamed("Choice");
 kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(NumberFieldRandomValueProvider).inSingletonScope().whenTargetNamed("Number");
+kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(ManagedMetadataFieldRandomValueProvider).inSingletonScope().whenTargetNamed("TaxonomyFieldType");
 kernel2013.bind<interfaces.Factory<IFieldValueProvider>>("Factory<IFieldValueProvider>").toFactory<IFieldValueProvider>((context) => {
     return (type: string) => {
         if (context.container.isBoundNamed("IFieldValueProvider", type)) {
@@ -63,6 +70,7 @@ kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(NoteFieldValueWriter)
 kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(DateFieldValueWriter).inSingletonScope().whenTargetNamed("DateTime");
 kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(ChoiceFieldValueWriter).inSingletonScope().whenTargetNamed("Choice");
 kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(NumberFieldValueWriter).inSingletonScope().whenTargetNamed("Number");
+kernel2013.bind<IFieldValueWriter>("IFieldValueWriter").to(ManagedMetadataFieldValueWriter).inSingletonScope().whenTargetNamed("TaxonomyFieldType");
 kernel2013.bind<interfaces.Factory<IFieldValueWriter>>("Factory<IFieldValueWriter>").toFactory<IFieldValueWriter>((context) => {
     return (type: string) => {
         if (context.container.isBoundNamed("IFieldValueWriter", type)) {

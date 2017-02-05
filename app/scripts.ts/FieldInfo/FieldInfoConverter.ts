@@ -1,4 +1,4 @@
-import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, INumberFieldInfo, DateFormat, ChoiceFormat } from "./IFieldInfo";
+import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, INumberFieldInfo, IManagedMetadataFieldInfo, DateFormat, ChoiceFormat } from "./IFieldInfo";
 
 export default class FieldInfoConverter {
     public static ConvertToIFieldInfo(fieldInfoResultFromRestAPI: any): IFieldInfo {
@@ -43,6 +43,14 @@ export default class FieldInfoConverter {
             numberFieldInfo.MinValue = fieldInfoResultFromRestAPI.MinimumValue;
             numberFieldInfo.MaxValue = fieldInfoResultFromRestAPI.MaximumValue;
             return numberFieldInfo;
+        }
+
+        if (fieldInfoResultFromRestAPI.TypeAsString === "TaxonomyFieldType" || fieldInfoResultFromRestAPI.TypeAsString === "TaxonomyFieldTypeMulti") {
+            const managedMetadataFieldInfo = <IManagedMetadataFieldInfo> baseFieldInfo;
+            managedMetadataFieldInfo.Type = "TaxonomyFieldType"; // treat Currency same as Number
+            managedMetadataFieldInfo.SspId = fieldInfoResultFromRestAPI.SspId;
+            managedMetadataFieldInfo.TermSetId = fieldInfoResultFromRestAPI.TermSetId;
+            return managedMetadataFieldInfo;
         }
 
         return baseFieldInfo;

@@ -5,6 +5,14 @@ export default class Random {
     }
 
     public static RandomChoice<T>(array: T[]): T {
+        if(!array) {
+            throw new Error("Array is undefined");
+        }
+
+        if (array.length < 1) {
+            throw new Error("Array is empty");
+        }
+
         const randIndex = Random.RandomIntFromInterval(0, array.length - 1);
         return array[randIndex];
     };

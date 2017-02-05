@@ -41,3 +41,8 @@ export interface INumberFieldInfo extends IFieldInfo {
     MinValue: number;
     MaxValue: number;
 }
+
+export interface IManagedMetadataFieldInfo extends IFieldInfo {
+    SspId: string;
+    TermSetId: string;
+}
