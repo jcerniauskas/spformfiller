@@ -46,3 +46,7 @@ export interface IManagedMetadataFieldInfo extends IFieldInfo {
     SspId: string;
     TermSetId: string;
 }
+
+export interface IPeopleFieldInfo extends IFieldInfo {
+    GroupId?: number;
+}

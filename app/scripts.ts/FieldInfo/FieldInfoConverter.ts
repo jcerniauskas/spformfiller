@@ -1,4 +1,4 @@
-import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, INumberFieldInfo, IManagedMetadataFieldInfo, DateFormat, ChoiceFormat } from "./IFieldInfo";
+import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, INumberFieldInfo, IManagedMetadataFieldInfo, IPeopleFieldInfo, DateFormat, ChoiceFormat } from "./IFieldInfo";
 
 export default class FieldInfoConverter {
     public static ConvertToIFieldInfo(fieldInfoResultFromRestAPI: any): IFieldInfo {
@@ -47,10 +47,19 @@ export default class FieldInfoConverter {
 
         if (fieldInfoResultFromRestAPI.TypeAsString === "TaxonomyFieldType" || fieldInfoResultFromRestAPI.TypeAsString === "TaxonomyFieldTypeMulti") {
             const managedMetadataFieldInfo = <IManagedMetadataFieldInfo> baseFieldInfo;
-            managedMetadataFieldInfo.Type = "TaxonomyFieldType"; // treat Currency same as Number
+            managedMetadataFieldInfo.Type = "TaxonomyFieldType";
             managedMetadataFieldInfo.SspId = fieldInfoResultFromRestAPI.SspId;
             managedMetadataFieldInfo.TermSetId = fieldInfoResultFromRestAPI.TermSetId;
             return managedMetadataFieldInfo;
+        }
+
+        if (fieldInfoResultFromRestAPI.TypeAsString === "User" || fieldInfoResultFromRestAPI.TypeAsString === "UserMulti") {
+            const peopleFieldInfo = <IPeopleFieldInfo> baseFieldInfo;
+            peopleFieldInfo.Type = "User";
+            if (fieldInfoResultFromRestAPI.SelectionGroup > 0) {
+                peopleFieldInfo.GroupId = fieldInfoResultFromRestAPI.SelectionGroup;
+            }
+            return peopleFieldInfo;
         }
 
         return baseFieldInfo;

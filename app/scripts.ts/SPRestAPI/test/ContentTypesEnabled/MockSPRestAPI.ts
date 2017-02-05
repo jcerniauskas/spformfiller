@@ -4,9 +4,10 @@ import { ListFields } from "./ListFields";
 import { List } from "./List";
 import { ContentTypeFields } from "./ContentTypeFields";
 import TestUtils from "../../../test/TestUtils";
+import { SharedMockSPRestAPI } from "../SharedMockSPRestAPI";
 
 @injectable()
-export default class MockSPRestAPI implements ISPRestAPI {
+export default class MockSPRestAPI extends SharedMockSPRestAPI {
     public GetList(): Promise<any> {
         return TestUtils.ReturnDelay(List);
     }

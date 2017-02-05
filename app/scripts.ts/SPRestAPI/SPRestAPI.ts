@@ -45,4 +45,18 @@ export default class SPRestAPI implements ISPRestAPI {
 
         return queryResult;
     }
+
+    public async GetSiteUsers(): Promise<any> {
+        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/siteusers`;
+        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
+
+        return queryResult;
+    }
+
+    public async GetGroupUsers(groupId: number): Promise<any> {
+        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/sitegroups(${groupId})/users`;
+        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
+
+        return queryResult;
+    }
 }
