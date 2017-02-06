@@ -9,7 +9,7 @@ export default class SPFormUrlMatcher implements IPageVisibilityHandler {
         let pageName = beforeQueryString.split("/").slice(-1)[0];
 
         // TODO: change into more robust handling instead of matching by URL
-        if (pageName === "EditForm.aspx" || pageName === "NewForm.aspx") {
+        if (pageName === "EditForm.aspx" || pageName === "NewForm.aspx" || pageName === "NewDocSet.aspx") {
             return true;
         }
 
