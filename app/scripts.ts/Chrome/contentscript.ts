@@ -17,12 +17,10 @@ chrome.runtime.onMessage.addListener(
         }
 
         scriptInjectionPromise.then(() => {
-            PageContextScriptInjector.InjectFunctionCall("SPFormFiller.injectionscript.default.FillFormFields").then(() => {
-                sendResponse(<FillFormMessageResponse> { FormFilled : true });
-            });
+            PageContextScriptInjector.InjectFunctionCall("SPFormFiller.injectionscript.default.FillFormFields");
         });
     }
 
     // we return true to indicate that we will send reponse asynchronously
-    return true;
+    sendResponse(<FillFormMessageResponse> { FormFilled : true });
 });

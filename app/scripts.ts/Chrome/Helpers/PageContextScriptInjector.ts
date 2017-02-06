@@ -20,11 +20,9 @@ export default class PageContextScriptInjector {
             const script = document.createElement("script");
             script.type = "text/javascript";
             script.textContent = actualCode;
-            script.onload = function() {
-                resolve();
-            };
             (document.head || document.documentElement).appendChild(script);
             script.remove();
+            resolve();
         });
     }
 }
