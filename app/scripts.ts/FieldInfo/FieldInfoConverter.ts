@@ -28,7 +28,7 @@ export default class FieldInfoConverter {
             const choiceFieldInfo = <IChoiceFieldInfo> baseFieldInfo;
             choiceFieldInfo.Type = "Choice"; // treat MultiChoice same as Choice
             choiceFieldInfo.FillInChoice = fieldInfoResultFromRestAPI.FillInChoice;
-            choiceFieldInfo.Choices = fieldInfoResultFromRestAPI.Choices;
+            choiceFieldInfo.Choices = fieldInfoResultFromRestAPI.Choices.results;
             if (fieldInfoResultFromRestAPI.TypeAsString === "MultiChoice") {
                 choiceFieldInfo.ChoiceFormat = ChoiceFormat.CheckBoxes;
             } else {

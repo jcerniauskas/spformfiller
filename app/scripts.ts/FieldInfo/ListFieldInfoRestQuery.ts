@@ -23,7 +23,7 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
         // first we need to check if the list has content types enabled
         const listQueryResult = await this._spRestAPI.GetList();
         let fieldsResult: any = undefined;
-        if (listQueryResult.ContentTypesEnabled) {
+        if (listQueryResult.d.ContentTypesEnabled) {
             // if it has - we need to get the fields that that the current content type has
             const contentTypeInformation = await this._contentTypeDeterminer.GetContentTypeInformation();
             fieldsResult = await this._spRestAPI.GetListContentTypeFields(contentTypeInformation.ContentTypeId);
@@ -32,7 +32,7 @@ export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
             fieldsResult = await this._spRestAPI.GetListFields();
         }
 
-        return fieldsResult.value.map(fieldInfoResult => FieldInfoConverter.ConvertToIFieldInfo(fieldInfoResult));
+        return fieldsResult.d.results.map(fieldInfoResult => FieldInfoConverter.ConvertToIFieldInfo(fieldInfoResult));
     }
 
     public GetFieldInfo(): Promise<IFieldInfo[]> {

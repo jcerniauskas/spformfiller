@@ -32,7 +32,7 @@ export default class UserRESTService implements IUserService {
     }
 
     private static GetUsersFromRestResult(restResult: any): User[] {
-        return restResult.value.map(userResult => <User>{
+        return restResult.d.results.map(userResult => <User>{
             Id: userResult.Id,
             LoginName: userResult.LoginName,
             Title: userResult.Title,

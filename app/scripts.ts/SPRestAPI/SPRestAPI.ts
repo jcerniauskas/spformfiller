@@ -16,7 +16,7 @@ export default class SPRestAPI implements ISPRestAPI {
             url: query,
             async: false,
             headers: {
-                "Accept": "application/json;odata=nometadata",
+                "Accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val()
             },
             type: "GET",

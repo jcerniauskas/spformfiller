@@ -1,8 +1,10 @@
+import { injectable } from "inversify";
 import { SiteUsers } from "./Shared/SiteUsers";
 import { Group6Users } from "./Shared/Group6Users";
 import { ISPRestAPI } from "../ISPRestAPI";
 import TestUtils from "../../test/TestUtils";
 
+@injectable()
 export abstract class SharedMockSPRestAPI implements ISPRestAPI {
     public abstract GetList(): Promise<any>;
 
