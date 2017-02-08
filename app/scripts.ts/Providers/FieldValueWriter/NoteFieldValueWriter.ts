@@ -8,12 +8,18 @@ import { FieldValueWriterBase } from "./FieldValueWriterBase";
 export default class NoteFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: IFieldInfo, value: any): void {
         let textAreaField = super.TryGetInputControlForField(fieldInfo, "textarea", "$TextField");
-        if (!textAreaField) {
-            textAreaField = super.TryGetInputControlForField(fieldInfo, "textarea", "$TextField_inplacerte");
-        }
-        super.ThrowErrorIfNoElement(textAreaField);
-        super.ThrowErrorIfMultiple(textAreaField);
+        if (textAreaField) {
+            textAreaField.val(value);
+        } else {
+            const divField = super.TryGetInputControlForField(fieldInfo, "div", "$TextField_inplacerte");
+            super.ThrowErrorIfNoElement(divField);
+            super.ThrowErrorIfMultiple(divField);
 
-        textAreaField.val(value);
+            const divTextField = divField.children("p");
+            super.ThrowErrorIfNoElement(divTextField);
+            super.ThrowErrorIfMultiple(divTextField);
+
+            divTextField.text(value);
+        }
     }
 }

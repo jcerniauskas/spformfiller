@@ -8,7 +8,7 @@ import { FieldValueWriterBase } from "./FieldValueWriterBase";
 export default class TextFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: IFieldInfo, value: any): void {
         let inputField = super.TryGetInputControlForField(fieldInfo, "input", "$TextField");
-        
+
         super.ThrowErrorIfNoElement(inputField);
         super.ThrowErrorIfMultiple(inputField);
 
