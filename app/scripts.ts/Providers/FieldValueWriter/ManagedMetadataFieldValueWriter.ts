@@ -4,7 +4,7 @@ import { IFieldValueWriter } from "./IFieldValueWriter";
 import { IFieldInfo } from "../../FieldInfo/IFieldInfo";
 import { injectable } from "inversify";
 import { FieldValueWriterBase } from "./FieldValueWriterBase";
-import { Term } from "../../Services/IManagedMetadataService";
+import { Term } from "../../Services/ManagedMetadata/IManagedMetadataService";
 
 // this class writes a value to a taxonomy field
 @injectable()

@@ -1,4 +1,4 @@
-import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, INumberFieldInfo, IManagedMetadataFieldInfo, IPeopleFieldInfo, DateFormat, ChoiceFormat } from "./IFieldInfo";
+import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, INumberFieldInfo, IManagedMetadataFieldInfo, IPeopleFieldInfo, DateFormat, ChoiceFormat } from "../../FieldInfo/IFieldInfo";
 
 export default class FieldInfoConverter {
     public static ConvertToIFieldInfo(fieldInfoResultFromRestAPI: any): IFieldInfo {

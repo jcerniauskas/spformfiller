@@ -7,7 +7,10 @@ import { FieldValueWriterBase } from "./FieldValueWriterBase";
 @injectable()
 export default class TextFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: IFieldInfo, value: any): void {
-        const inputField = super.GetInputControlForField(fieldInfo, "input", "$TextField");
+        let inputField = super.TryGetInputControlForField(fieldInfo, "input", "$TextField");
+        
+        super.ThrowErrorIfNoElement(inputField);
+        super.ThrowErrorIfMultiple(inputField);
 
         inputField.val(value);
     }

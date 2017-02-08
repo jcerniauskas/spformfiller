@@ -4,6 +4,7 @@ import SPVersion from "./Versions/SPVersion";
 
 import { IContentTypeDeterminer } from "./ContentTypeDetermination/IContentTypeInfo";
 import PageContentTypeDeterminerByField from "./ContentTypeDetermination/PageContentTypeDeterminerByField";
+import CompositePageContentTypeDeterminer from "./ContentTypeDetermination/CompositePageContentTypeDeterminer";
 import { IFieldInfoGatherer } from "./FieldInfo/IFieldInfo";
 import ListFieldInfoRestQuery from "./FieldInfo/ListFieldInfoRestQuery";
 import { IPageContextExtractor } from "./PageContextInformation/IPageContextInformation";
@@ -14,10 +15,12 @@ import { ISPRestAPI } from "./SPRestAPI/ISPRestAPI";
 import SPRestAPI from "./SPRestAPI/SPRestAPI";
 import { IFormFiller } from "./FormFiller/IFormFiller";
 import FormFiller from "./FormFiller/FormFiller";
-import { IManagedMetadataService } from "./Services/IManagedMetadataService";
-import ManagedMetadataService from "./Services/ManagedMetadataService";
-import { IUserService } from "./Services/IUserService";
-import UserRESTService from "./Services/UserRESTService";
+import { IManagedMetadataService } from "./Services/ManagedMetadata/IManagedMetadataService";
+import ManagedMetadataService from "./Services/ManagedMetadata/ManagedMetadataService";
+import { IUserService } from "./Services/User/IUserService";
+import UserRESTService from "./Services/User/UserRESTService";
+import { IListInfoService } from "./Services/ListInfo/IListInfoService";
+import ListInfoRESTService from "./Services/ListInfo/ListInfoRESTService";
 
 import { IFieldValueProvider } from "./Providers/FieldValueProvider/IFieldValueProvider";
 import TextFieldRandomValueProvider from "./Providers/FieldValueProvider/TextFieldRandomValueProvider";
@@ -44,7 +47,7 @@ interface KernelVersionMap {
 const versionMap: KernelVersionMap = { };
 
 const kernel2013 = new Container();
-kernel2013.bind<IContentTypeDeterminer>("IContentTypeDeterminer").to(PageContentTypeDeterminerByField).inSingletonScope();
+kernel2013.bind<IContentTypeDeterminer>("IContentTypeDeterminer").to(CompositePageContentTypeDeterminer).inSingletonScope();
 kernel2013.bind<IFieldInfoGatherer>("IFieldInfoGatherer").to(ListFieldInfoRestQuery).inSingletonScope();
 kernel2013.bind<IPageContextExtractor>("IPageContextExtractor").to(SPPageContextInfo).inSingletonScope();
 kernel2013.bind<IPageVisibilityHandler>("IPageVisibilityHandler").to(SPFormUrlMatcher).inSingletonScope();
@@ -52,6 +55,7 @@ kernel2013.bind<ISPRestAPI>("ISPRestAPI").to(SPRestAPI).inSingletonScope();
 kernel2013.bind<IFormFiller>("IFormFiller").to(FormFiller).inSingletonScope();
 kernel2013.bind<IManagedMetadataService>("IManagedMetadataService").to(ManagedMetadataService).inSingletonScope();
 kernel2013.bind<IUserService>("IUserService").to(UserRESTService).inSingletonScope();
+kernel2013.bind<IListInfoService>("IListInfoService").to(ListInfoRESTService).inSingletonScope();
 
 // bind value providers and value writers to their field types
 kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(TextFieldRandomValueProvider).inSingletonScope().whenTargetNamed("Text");

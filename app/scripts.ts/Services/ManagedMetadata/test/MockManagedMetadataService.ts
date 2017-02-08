@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
-import { IFieldValueProvider } from "./../../Providers/FieldValueProvider/IFieldValueProvider";
+import { IFieldValueProvider } from "../../../Providers/FieldValueProvider/IFieldValueProvider";
 import { Term, IManagedMetadataService } from "../IManagedMetadataService";
-import TestUtils from "../../test/TestUtils";
+import TestUtils from "../../../test/TestUtils";
 
 @injectable()
 export default class MockManagedMetadataService implements IManagedMetadataService {

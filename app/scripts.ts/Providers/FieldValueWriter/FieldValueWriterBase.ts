@@ -6,6 +6,14 @@ import { IFieldValueWriter } from "./IFieldValueWriter";
 export abstract class FieldValueWriterBase implements IFieldValueWriter {
     public abstract WriteValue(fieldInfo: IFieldInfo, value: any): void;
 
+    protected TryGetInputControl(selector: string): JQuery {
+        try {
+            return this.GetInputControl(selector);
+        } catch (e) {
+            return null;
+        }
+    }
+
     protected GetInputControl(selector: string): JQuery {
         const inputControl = $(selector);
         this.ThrowErrorIfNoElement(inputControl, "Cannot find field to fill with value");
@@ -15,6 +23,14 @@ export abstract class FieldValueWriterBase implements IFieldValueWriter {
         }
 
         return inputControl;
+    }
+
+    protected TryGetInputControlForField(fieldInfo: IFieldInfo, type: string, idSuffix: string): JQuery {
+        try {
+            return this.GetInputControlForField(fieldInfo, type, idSuffix);
+        } catch (e) {
+            return null;
+        }
     }
 
     protected GetInputControlForField(fieldInfo: IFieldInfo, type: string, idSuffix: string): JQuery {
@@ -27,8 +43,22 @@ export abstract class FieldValueWriterBase implements IFieldValueWriter {
         return `${fieldInfo.InternalName}_${fieldInfo.Id.toLowerCase()}`;
     }
 
-    protected ThrowErrorIfNoElement(element: JQuery, message: string): void {
+    protected ThrowErrorIfNoElement(element: JQuery, message?: string): void {
+        if (!message) {
+            message = "Cannot find field to fill with value";
+        }
+
         if (!element || element.length < 1) {
+            throw new Error(message);
+        }
+    }
+
+    protected ThrowErrorIfMultiple(element: JQuery, message?: string): void {
+        if (!message) {
+            message = "More than one field found";
+        }
+
+        if (element.length > 1) {
             throw new Error(message);
         }
     }

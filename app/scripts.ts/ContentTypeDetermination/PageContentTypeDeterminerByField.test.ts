@@ -12,7 +12,6 @@ describe("PageContentTypeDeterminerByField", () => {
         loadFixtures("ContentTypeDetermination/test/fixtures/CarunaDocumentFixture.html");
         let contentTypeInformation = await contentTypeDeterminerByField.GetContentTypeInformation();
         expect(contentTypeInformation.ContentTypeId).toBe("0x010100F919E94B778746758419E38E98A0550D00DE223D4D04A75F4B96371C07EFB48057");
-        expect(contentTypeInformation.ContentTypeTitle).toBe("Caruna document");
         done();
     });
 

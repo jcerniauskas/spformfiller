@@ -2,7 +2,7 @@ import { IFieldValueWriter } from "./IFieldValueWriter";
 import { IFieldInfo } from "../../FieldInfo/IFieldInfo";
 import { injectable } from "inversify";
 import { FieldValueWriterBase } from "./FieldValueWriterBase";
-import { User } from "../../Services/IUserService";
+import { User } from "../../Services/User/IUserService";
 
 // this class writes a value to a user field
 @injectable()

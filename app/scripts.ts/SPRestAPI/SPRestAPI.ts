@@ -25,38 +25,38 @@ export default class SPRestAPI implements ISPRestAPI {
         return queryResult;
     }
 
-    public async GetList(): Promise<any> {
+    public GetList(): Promise<any> {
         const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + "/_api/web/lists('" + this._pageContextInformation.ListId + "')";
-        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
-
-        return queryResult;
+        return this.ReturnGenericGetQueryResult(query);
     }
 
-    public async GetListFields(): Promise<any> {
+    public GetListFields(): Promise<any> {
         const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + "/_api/web/lists('" + this._pageContextInformation.ListId + "')/fields";
-        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
-
-        return queryResult;
+        return this.ReturnGenericGetQueryResult(query);
     }
 
-    public async GetListContentTypeFields(contentTypeId: string): Promise<any> {
+    public GetListContentTypeFields(contentTypeId: string): Promise<any> {
         const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/lists('${this._pageContextInformation.ListId}')/ContentTypes('${contentTypeId}')/Fields`;
-        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
-
-        return queryResult;
+        return this.ReturnGenericGetQueryResult(query);
     }
 
-    public async GetSiteUsers(): Promise<any> {
+    public GetSiteUsers(): Promise<any> {
         const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/siteusers`;
-        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
-
-        return queryResult;
+        return this.ReturnGenericGetQueryResult(query);
     }
 
-    public async GetGroupUsers(groupId: number): Promise<any> {
+    public GetGroupUsers(groupId: number): Promise<any> {
         const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/sitegroups(${groupId})/users`;
-        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
+        return this.ReturnGenericGetQueryResult(query);
+    }
 
-        return queryResult;
+    public GetFolderContentTypeOrder(folderServerRelativeUrl: string): Promise<any> {
+        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/GetFolderByServerRelativeUrl('${folderServerRelativeUrl}')/ContentTypeOrder`;
+        return this.ReturnGenericGetQueryResult(query);
+    }
+
+    public GetFolderUniqueContentTypeOrder(folderServerRelativeUrl: string): Promise<any> {
+        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/GetFolderByServerRelativeUrl('${folderServerRelativeUrl}')/UniqueContentTypeOrder`;
+        return this.ReturnGenericGetQueryResult(query);
     }
 }

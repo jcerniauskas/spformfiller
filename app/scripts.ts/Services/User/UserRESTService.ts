@@ -1,6 +1,6 @@
 import { injectable, inject } from "inversify";
 import { IUserService, User } from "./IUserService";
-import { ISPRestAPI } from "../SPRestAPI/ISPRestAPI";
+import { ISPRestAPI } from "../../SPRestAPI/ISPRestAPI";
 
 interface GroupUserPromises {
     [groupId: number]: Promise<User[]>;

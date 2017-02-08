@@ -1,7 +1,7 @@
 import { IFieldInfo, IPeopleFieldInfo } from "./../../FieldInfo/IFieldInfo";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { injectable, inject } from "inversify";
-import { IUserService, User } from "../../Services/IUserService";
+import { IUserService, User } from "../../Services/User/IUserService";
 import Random from "../../Utils/Random";
 
 // this class returns a random sentence of 3 to 5 words for filling in small text fields

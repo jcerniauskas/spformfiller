@@ -3,8 +3,8 @@ import SPVersion from "../Versions/SPVersion";
 import { ISPRestAPI } from "../SPRestAPI/ISPRestAPI";
 import MockSPRestAPINoContentTypes from "../SPRestAPI/test/NoContentTypes/MockSPRestAPI";
 import ContainerExtensions from "./ContainerExtensions";
-import { IManagedMetadataService } from "./../Services/IManagedMetadataService";
-import MockManagedMetadataService from "../Services/test/MockManagedMetadataService";
+import { IManagedMetadataService } from "./../Services/ManagedMetadata/IManagedMetadataService";
+import MockManagedMetadataService from "../Services/ManagedMetadata/test/MockManagedMetadataService";
 
 // this sets up the inversify container for running tests. For example, some interfaces are immediately mocked.
 

@@ -2,8 +2,8 @@ import TestContainer from "../../test/inversify.config";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { IFieldInfo, ITextFieldInfo, IFieldInfoGatherer, IManagedMetadataFieldInfo } from "./../../FieldInfo/IFieldInfo";
 import ManagedMetadataFieldRandomValueProvider from "./ManagedMetadataFieldRandomValueProvider";
-import { IManagedMetadataService, Term } from "../../Services/IManagedMetadataService";
-import MockManagedMetadataService from "../../Services/test/MockManagedMetadataService";
+import { IManagedMetadataService, Term } from "../../Services/ManagedMetadata/IManagedMetadataService";
+import MockManagedMetadataService from "../../Services/ManagedMetadata/test/MockManagedMetadataService";
 
 describe("ManagedMetadataFieldRandomValueProvider", () => {
     TestContainer.snapshot();

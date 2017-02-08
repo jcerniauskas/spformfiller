@@ -13,8 +13,6 @@ export default class PageContentTypeDeterminerByField implements IContentTypeDet
                 return Promise.resolve<IContentTypeInformation>({
                     // id will be in the "value" attribute
                     ContentTypeId: selectedOption.attr("value"),
-                    // and the title will be the option actual text
-                    ContentTypeTitle: selectedOption.text()
                 });
             }
         }

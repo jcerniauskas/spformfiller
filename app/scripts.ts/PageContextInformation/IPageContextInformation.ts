@@ -5,4 +5,6 @@ export interface IPageContextExtractor {
 export interface IPageContextInformation {
     WebServerRelativeUrl: string;
     ListId: string;
+    FolderUrl: string;
+    ContentTypeId: string;
 }
