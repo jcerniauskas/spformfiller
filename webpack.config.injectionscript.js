@@ -2,13 +2,13 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        "background": "./app/scripts.ts/Chrome/background.ts",
-        "chromereload": "./app/scripts.ts/Chrome/chromereload.ts",
-        "contentscript": "./app/scripts.ts/Chrome/contentscript.ts"
+        "injectionscript": "./app/scripts.ts/Chrome/injectionscript.ts",
     },
     output: {
         filename: "[name].js",
         path: __dirname + "/app/scripts",
+        library: ["SPFormFiller", "[name]"],
+        libraryTarget: "var"
     },
 
     // Enable sourcemaps for debugging webpack's output.

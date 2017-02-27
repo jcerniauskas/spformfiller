@@ -4,10 +4,15 @@
         "sourceMap": true,
         "outDir": "app/scripts.js",
         "types": [
-            "chrome", "jquery"
+            "chrome", "jquery", "jasmine", "jasmine-jquery", "reflect-metadata", "sharepoint", "query-string"
+        ],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "lib": [
+            "es6", "dom"
         ]
     },
     "include": [
-        "app/scripts.ts/*.ts"
+        "app/scripts.ts/**/*.ts"
     ]
 }

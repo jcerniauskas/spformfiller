@@ -3,7 +3,6 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
 import runSequence from 'run-sequence';
-import {stream as wiredep} from 'wiredep';
 import gutil from "gulp-util";
 import webpack from "webpack";
 import WebPackDevServer from "webpack-dev-server";
@@ -36,15 +35,21 @@ gulp.task('extras', () => {
   }).pipe(gulp.dest('dist'));
 });
 
-gulp.task("webpack", (cb) => {
-    // run webpack
-    webpack(require("./webpack.config.js"), function(err, stats) {
-        if(err) throw new gutil.PluginError("webpack", err);
-        gutil.log("[webpack]", stats.toString({
-            // output options
-        }));
-        cb();
-    });
+gulp.task("webpack", (done) => {
+        webpack(require("./webpack.config.js"), function(err, stats) {
+          if(err) throw new gutil.PluginError("webpack", err);
+          gutil.log("[webpack]", stats.toString({
+              // output options
+          }));
+
+          webpack(require("./webpack.config.injectionscript.js"), function(err, stats) {
+              if(err) throw new gutil.PluginError("webpack", err);
+              gutil.log("[webpack]", stats.toString({
+                  // output options
+              }));
+              done();
+          });
+      });
 });
 
 gulp.task('images', () => {
@@ -89,9 +94,9 @@ gulp.task('chromeManifest', () => {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
+gulp.task('clean', del.bind(null, ['.tmp', 'dist', 'app/scripts', 'app/scripts.js']));
 
-gulp.task('watch', ['copy'], () => {
+gulp.task('watch', ['build', 'copy'], () => {
   $.livereload.listen();
 
   gulp.watch([
@@ -103,19 +108,10 @@ gulp.task('watch', ['copy'], () => {
   ]).on('change', $.livereload.reload);
 
   gulp.watch('app/scripts.ts/**/*.ts', ['webpack']);
-  gulp.watch('bower.json', ['wiredep']);
 });
 
 gulp.task('size', () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
-});
-
-gulp.task('wiredep', () => {
-  gulp.src('app/*.html')
-    .pipe(wiredep({
-      ignorePath: /^(\.\.\/)*\.\./
-    }))
-    .pipe(gulp.dest('app'));
 });
 
 gulp.task('package', function () {
