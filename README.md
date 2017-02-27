@@ -20,12 +20,17 @@ Extension currently works on SharePoint 2013 and SharePoint Online classic clien
 
 ## Contributing
 - Fork repository
+- Run `npm install`
 - Make changes
 - Run `gulp build`
 - Open (chrome://extensions/) or select the menu `Window > Extensions`
 - Enable the developer mode at top right
 - Click `Load unpacked extension...` and select the `app` folder
+- Test changes
 - Create a pull request for `develop` branch to contribute
 
+## Original author
+Original idea and implementation by Half Scheidl
+
 ## License
-[MIT](http://opensource.org/licenses/MIT)
+This project is licensed under the terms of the [MIT](http://opensource.org/licenses/MIT) license.
