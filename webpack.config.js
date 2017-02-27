@@ -4,9 +4,7 @@ module.exports = {
     entry: {
         "background": "./app/scripts.ts/Chrome/background.ts",
         "chromereload": "./app/scripts.ts/Chrome/chromereload.ts",
-        "contentscript": "./app/scripts.ts/Chrome/contentscript.ts",
-        "options": "./app/scripts.ts/Chrome/options.ts",
-        "popup": "./app/scripts.ts/Chrome/popup.ts"
+        "contentscript": "./app/scripts.ts/Chrome/contentscript.ts"
     },
     output: {
         filename: "[name].js",
