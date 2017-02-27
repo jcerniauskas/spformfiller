@@ -1,43 +1,43 @@
 import "reflect-metadata";  // this is a required polyfill for inversify and should only be imported once in the application
 import { inject, injectable, Container, interfaces } from "inversify";
-import SPVersion from "./Versions/SPVersion";
+import { SPVersion } from "./Versions/SPVersion";
 
 import { IContentTypeDeterminer } from "./ContentTypeDetermination/IContentTypeInfo";
-import PageContentTypeDeterminerByField from "./ContentTypeDetermination/PageContentTypeDeterminerByField";
-import CompositePageContentTypeDeterminer from "./ContentTypeDetermination/CompositePageContentTypeDeterminer";
+import { PageContentTypeDeterminerByField } from "./ContentTypeDetermination/PageContentTypeDeterminerByField";
+import { CompositePageContentTypeDeterminer } from "./ContentTypeDetermination/CompositePageContentTypeDeterminer";
 import { IFieldInfoGatherer } from "./FieldInfo/IFieldInfo";
-import ListFieldInfoRestQuery from "./FieldInfo/ListFieldInfoRestQuery";
+import { ListFieldInfoRestQuery } from "./FieldInfo/ListFieldInfoRestQuery";
 import { IPageContextExtractor } from "./PageContextInformation/IPageContextInformation";
-import SPPageContextInfo from "./PageContextInformation/SPPageContextInfo";
+import { SPPageContextInfo } from "./PageContextInformation/SPPageContextInfo";
 import { IPageVisibilityHandler } from "./PageVisibilityHandler/IPageVisibilityHandler";
-import SPFormUrlMatcher from "./PageVisibilityHandler/SPFormUrlMatcher";
+import { SPFormUrlMatcher } from "./PageVisibilityHandler/SPFormUrlMatcher";
 import { ISPRestAPI } from "./SPRestAPI/ISPRestAPI";
-import SPRestAPI from "./SPRestAPI/SPRestAPI";
+import { SPRestAPI } from "./SPRestAPI/SPRestAPI";
 import { IFormFiller } from "./FormFiller/IFormFiller";
-import FormFiller from "./FormFiller/FormFiller";
+import { FormFiller } from "./FormFiller/FormFiller";
 import { IManagedMetadataService } from "./Services/ManagedMetadata/IManagedMetadataService";
-import ManagedMetadataService from "./Services/ManagedMetadata/ManagedMetadataService";
+import { ManagedMetadataService } from "./Services/ManagedMetadata/ManagedMetadataService";
 import { IUserService } from "./Services/User/IUserService";
-import UserRESTService from "./Services/User/UserRESTService";
+import { UserRESTService } from "./Services/User/UserRESTService";
 import { IListInfoService } from "./Services/ListInfo/IListInfoService";
-import ListInfoRESTService from "./Services/ListInfo/ListInfoRESTService";
+import { ListInfoRESTService } from "./Services/ListInfo/ListInfoRESTService";
 
 import { IFieldValueProvider } from "./Providers/FieldValueProvider/IFieldValueProvider";
-import TextFieldRandomValueProvider from "./Providers/FieldValueProvider/TextFieldRandomValueProvider";
-import NoteFieldRandomValueProvider from "./Providers/FieldValueProvider/NoteFieldRandomValueProvider";
-import DateFieldRandomValueProvider from "./Providers/FieldValueProvider/DateFieldRandomValueProvider";
-import ChoiceFieldRandomValueProvider from "./Providers/FieldValueProvider/ChoiceFieldRandomValueProvider";
-import NumberFieldRandomValueProvider from "./Providers/FieldValueProvider/NumberFieldRandomValueProvider";
-import ManagedMetadataFieldRandomValueProvider from "./Providers/FieldValueProvider/ManagedMetadataFieldRandomValueProvider";
-import PeopleFieldRandomValueProvider from "./Providers/FieldValueProvider/PeopleFieldRandomValueProvider";
+import { TextFieldRandomValueProvider } from "./Providers/FieldValueProvider/TextFieldRandomValueProvider";
+import { NoteFieldRandomValueProvider } from "./Providers/FieldValueProvider/NoteFieldRandomValueProvider";
+import { DateFieldRandomValueProvider } from "./Providers/FieldValueProvider/DateFieldRandomValueProvider";
+import { ChoiceFieldRandomValueProvider } from "./Providers/FieldValueProvider/ChoiceFieldRandomValueProvider";
+import { NumberFieldRandomValueProvider } from "./Providers/FieldValueProvider/NumberFieldRandomValueProvider";
+import { ManagedMetadataFieldRandomValueProvider } from "./Providers/FieldValueProvider/ManagedMetadataFieldRandomValueProvider";
+import { PeopleFieldRandomValueProvider } from "./Providers/FieldValueProvider/PeopleFieldRandomValueProvider";
 import { IFieldValueWriter } from "./Providers/FieldValueWriter/IFieldValueWriter";
-import TextFieldValueWriter from "./Providers/FieldValueWriter/TextFieldValueWriter";
-import NoteFieldValueWriter from "./Providers/FieldValueWriter/NoteFieldValueWriter";
-import DateFieldValueWriter from "./Providers/FieldValueWriter/DateFieldValueWriter";
-import ChoiceFieldValueWriter from "./Providers/FieldValueWriter/ChoiceFieldValueWriter";
-import NumberFieldValueWriter from "./Providers/FieldValueWriter/NumberFieldValueWriter";
-import ManagedMetadataFieldValueWriter from "./Providers/FieldValueWriter/ManagedMetadataFieldValueWriter";
-import PeopleFieldValueWriter from "./Providers/FieldValueWriter/PeopleFieldValueWriter";
+import { TextFieldValueWriter } from "./Providers/FieldValueWriter/TextFieldValueWriter";
+import { NoteFieldValueWriter } from "./Providers/FieldValueWriter/NoteFieldValueWriter";
+import { DateFieldValueWriter } from "./Providers/FieldValueWriter/DateFieldValueWriter";
+import { ChoiceFieldValueWriter } from "./Providers/FieldValueWriter/ChoiceFieldValueWriter";
+import { NumberFieldValueWriter } from "./Providers/FieldValueWriter/NumberFieldValueWriter";
+import { ManagedMetadataFieldValueWriter } from "./Providers/FieldValueWriter/ManagedMetadataFieldValueWriter";
+import { PeopleFieldValueWriter } from "./Providers/FieldValueWriter/PeopleFieldValueWriter";
 
 interface KernelVersionMap {
     [version: number]: Container;
@@ -95,7 +95,7 @@ kernel2013.bind<interfaces.Factory<IFieldValueWriter>>("Factory<IFieldValueWrite
 
 versionMap[SPVersion.SP2013] = kernel2013;
 
-export default class ContainersForVersion {
+export class ContainersForVersion {
     public static GetContainerForVersion(version: SPVersion): Container {
         return versionMap[version];
     }

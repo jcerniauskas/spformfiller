@@ -1,5 +1,5 @@
 // provides some convenient utility methods for randomizing some values
-export default class Random {
+export class Random {
     public static RandomIntFromInterval(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }

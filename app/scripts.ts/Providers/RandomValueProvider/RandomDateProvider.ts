@@ -1,7 +1,7 @@
-import Random from "../../Utils/Random";
+import { Random } from "../../Utils/Random";
 
 // this class returns a random date based on various constraints
-export default class RandomDateProvider {
+export class RandomDateProvider {
     public static GetRandomDatePlusMinusOneYear(): Promise<any> {
         const currentDateYearBefore = new Date();
         currentDateYearBefore.setFullYear(new Date().getFullYear() - 1);

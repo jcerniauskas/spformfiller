@@ -1,6 +1,6 @@
 import TestContainer from "../../test/inversify.config";
 import { IFieldValueWriter } from "./IFieldValueWriter";
-import ChoiceFieldValueWriter from "./ChoiceFieldValueWriter";
+import { ChoiceFieldValueWriter } from "./ChoiceFieldValueWriter";
 import { IFieldInfo, IChoiceFieldInfo, ChoiceFormat } from "../../FieldInfo/IFieldInfo";
 
 describe("ChoiceFieldValueWriter", () => {

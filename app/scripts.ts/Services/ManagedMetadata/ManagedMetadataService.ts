@@ -9,8 +9,9 @@ interface TermPromises {
     [termsetId: string]: Promise<TermFromAPI[]>;
 }
 
+// this is an implementation of IManagedMetadataService which uses CSOM API to get the available terms for a termset
 @injectable()
-export default class ManagedMetadataService implements IManagedMetadataService {
+export class ManagedMetadataService implements IManagedMetadataService {
     private LoadedTerms: TermPromises = { };
 
     private GetTerms(termsetId: string): Promise<TermFromAPI[]> {
@@ -51,6 +52,7 @@ export default class ManagedMetadataService implements IManagedMetadataService {
         return allTerms.filter(term => term.AvailableForTagging);
     }
 
+    // this function ensures that CSOM taxonomy methods will be executed after required SP scripts have been loaded
     private static ExecuteInContext(contextAction: (context: SP.ClientContext) => void): void {
         SP.SOD.loadMultiple(["sp.js"], () => {
             // Make sure taxonomy library is registered

@@ -1,11 +1,13 @@
 import { IContentTypeDeterminer, IContentTypeInformation } from "./IContentTypeInfo";
 import { injectable, inject } from "inversify";
-import PageContentTypeDeterminerByField from "./PageContentTypeDeterminerByField";
+import { PageContentTypeDeterminerByField } from "./PageContentTypeDeterminerByField";
 import { IListInfoService } from "../Services/ListInfo/IListInfoService";
 import { IPageContextExtractor } from "../PageContextInformation/IPageContextInformation";
 
+// this IContentTypeDeterminer will try to determine current content type using more complex logic - it will first try to use PageContentTypeDeterminerByField,
+// but if the field is not present then it will use SharePoint's List service and at last it will fall back to checking the ContentTypeId from query string
 @injectable()
-export default class CompositePageContentTypeDeterminer implements IContentTypeDeterminer {
+export class CompositePageContentTypeDeterminer implements IContentTypeDeterminer {
     private _pageContentTypeDeterminerByField = new PageContentTypeDeterminerByField();
 
     public constructor (
@@ -15,7 +17,7 @@ export default class CompositePageContentTypeDeterminer implements IContentTypeD
     public async GetContentTypeInformation(): Promise<IContentTypeInformation> {
         const listQueryResult = await this._listInfoService.GetList();
         if (!listQueryResult.ContentTypesEnabled) {
-            // if content types are not enabled then we shouldn't return any content type informatino
+            // if content types are not enabled then we shouldn't return any content type information
             return null;
         }
 

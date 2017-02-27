@@ -4,9 +4,9 @@ import { injectable } from "inversify";
 import { FieldValueWriterBase } from "./FieldValueWriterBase";
 import { User } from "../../Services/User/IUserService";
 
-// this class writes a value to a user field
+// this class writes a value to a user field using SharePoint's SPClientPeoplePicker JS API
 @injectable()
-export default class PeopleFieldValueWriter extends FieldValueWriterBase {
+export class PeopleFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: IFieldInfo, value: User): void {
         const peoplePickerDiv = super.GetInputControlForField(fieldInfo, "div", "$ClientPeoplePicker");
         const editorControl = super.GetInputControlForField(fieldInfo, "input", "$ClientPeoplePicker_EditorInput");

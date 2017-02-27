@@ -5,7 +5,7 @@ import { FieldValueWriterBase } from "./FieldValueWriterBase";
 
 // this class writes a value to a number field (which should be a simple input field)
 @injectable()
-export default class NumberFieldValueWriter extends FieldValueWriterBase {
+export class NumberFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: INumberFieldInfo, value: any): void {
         let fieldSuffix = "$NumberField";
         // there is a slight difference in Currency type of fields - their control IDs are slightly different

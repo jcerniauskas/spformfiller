@@ -1,7 +1,7 @@
 import TestContainer from "../../test/inversify.config";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { IFieldInfo, INumberFieldInfo } from './../../FieldInfo/IFieldInfo';
-import NumberFieldRandomValueProvider from "./NumberFieldRandomValueProvider";
+import { NumberFieldRandomValueProvider } from "./NumberFieldRandomValueProvider";
 
 describe("NumberFieldRandomValueProvider", () => {
     TestContainer.snapshot();

@@ -5,7 +5,7 @@ import { IContentTypeDeterminer, IContentTypeInformation } from "../ContentTypeD
 
 // this component gets the field information for the form and should be able to return the information about fields which need to be filled in
 @injectable()
-export default class ListFieldInfoRestQuery implements IFieldInfoGatherer {
+export class ListFieldInfoRestQuery implements IFieldInfoGatherer {
     public constructor(@inject("IListInfoService") private _listInfoService: IListInfoService, @inject("IContentTypeDeterminer") private _contentTypeDeterminer: IContentTypeDeterminer) {
     }
 

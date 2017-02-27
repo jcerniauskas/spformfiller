@@ -5,7 +5,7 @@ import { FieldValueWriterBase } from "./FieldValueWriterBase";
 
 // this class writes a value to a date field
 @injectable()
-export default class DateFieldValueWriter extends FieldValueWriterBase {
+export class DateFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: IDateFieldInfo, value: any): void {
         const dateInputField = super.GetInputControlForField(fieldInfo, "input", "$DateTimeFieldDate");
 

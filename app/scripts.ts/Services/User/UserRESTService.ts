@@ -6,11 +6,13 @@ interface GroupUserPromises {
     [groupId: number]: Promise<User[]>;
 }
 
+// this implementation of IUserService uses SharePoint's REST API to get information about site or group users
 @injectable()
-export default class UserRESTService implements IUserService {
+export class UserRESTService implements IUserService {
     public constructor( @inject("ISPRestAPI") private _spRestAPI: ISPRestAPI) {
     }
 
+    // we will cache site users promise for improved performance when making multiple requests
     private _siteUsers: Promise<User[]>;
     public async GetSiteUsers(): Promise<User[]> {
         if (this._siteUsers === undefined) {
@@ -21,6 +23,7 @@ export default class UserRESTService implements IUserService {
         return UserRESTService.FilterSystemUsers(users);
     }
 
+    // we will use a dictionary to cache promises for each requested group for improved performance when making multiple requests
     private _groupUsers: GroupUserPromises = { };
     public async GetGroupUsers(groupId: number): Promise<User[]> {
         if (this._groupUsers[groupId] === undefined) {

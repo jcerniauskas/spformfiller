@@ -1,5 +1,5 @@
-import RandomDateProvider from "./RandomDateProvider";
-import Random from "../../Utils/Random";
+import { RandomDateProvider } from "./RandomDateProvider";
+import { Random } from "../../Utils/Random";
 
 describe("RandomDateProvider", () => {
     const randomValues = new Array<Date>(100).fill(new Date(1970, 0, 1));

@@ -2,11 +2,11 @@ import { IFieldInfo, IManagedMetadataFieldInfo } from "./../../FieldInfo/IFieldI
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { injectable, inject } from "inversify";
 import { IManagedMetadataService } from "../../Services/ManagedMetadata/IManagedMetadataService";
-import Random from "../../Utils/Random";
+import { Random } from "../../Utils/Random";
 
 // this class returns a random term from the field's termset
 @injectable()
-export default class ManagedMetadataFieldRandomValueProvider implements IFieldValueProvider {
+export class ManagedMetadataFieldRandomValueProvider implements IFieldValueProvider {
     constructor(@inject("IManagedMetadataService") private _managedMetadataService: IManagedMetadataService) { }
 
     public async GetRandomValue(fieldInfo: IManagedMetadataFieldInfo): Promise<any> {

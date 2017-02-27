@@ -2,6 +2,7 @@ import { injectable } from "inversify";
 import { IFieldInfo } from "./../../FieldInfo/IFieldInfo";
 import { IFieldValueWriter } from "./IFieldValueWriter";
 
+// a base abstract class for value writers which contains some commonly used functions
 @injectable()
 export abstract class FieldValueWriterBase implements IFieldValueWriter {
     public abstract WriteValue(fieldInfo: IFieldInfo, value: any): void;

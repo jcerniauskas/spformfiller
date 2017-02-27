@@ -1,8 +1,8 @@
 import TestContainer from "../test/inversify.config";
 import { ISPRestAPI } from "./../SPRestAPI/ISPRestAPI";
-import MockSPRestAPIContentTypesEnabled from "../SPRestAPI/test/ContentTypesEnabled/MockSPRestAPI";
+import { MockSPRestAPI as MockSPRestAPIContentTypesEnabled } from "../SPRestAPI/test/ContentTypesEnabled/MockSPRestAPI";
 import { IFieldInfo, IFieldInfoGatherer } from "./IFieldInfo";
-import ListFieldInfoRestQuery from "./ListFieldInfoRestQuery";
+import { ListFieldInfoRestQuery } from "./ListFieldInfoRestQuery";
 
 describe("ListFieldInfoRestQuery", async () => {
     TestContainer.snapshot();

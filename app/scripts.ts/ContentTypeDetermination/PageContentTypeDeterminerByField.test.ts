@@ -1,6 +1,6 @@
 import TestContainer from "../test/inversify.config";
 import { IContentTypeDeterminer, IContentTypeInformation } from "./IContentTypeInfo";
-import PageContentTypeDeterminerByField from "./PageContentTypeDeterminerByField";
+import { PageContentTypeDeterminerByField } from "./PageContentTypeDeterminerByField";
 
 describe("PageContentTypeDeterminerByField", () => {
     TestContainer.snapshot();

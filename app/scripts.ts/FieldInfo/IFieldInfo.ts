@@ -13,6 +13,8 @@ export interface IFieldInfoGatherer {
     GetVisibleEditableFieldInfo(): Promise<IFieldInfo[]>;
 }
 
+// each type-specific IFieldInfo interface can have more type-specific properties
+
 export interface ITextFieldInfo extends IFieldInfo {
     MaxLength: number;
 }
@@ -30,7 +32,6 @@ export enum ChoiceFormat {
     Radio,
     CheckBoxes,
 }
-
 export interface IChoiceFieldInfo extends IFieldInfo {
     FillInChoice: boolean;
     ChoiceFormat: ChoiceFormat;

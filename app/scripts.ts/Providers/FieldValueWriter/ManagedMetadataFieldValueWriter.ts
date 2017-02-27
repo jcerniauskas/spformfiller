@@ -8,7 +8,7 @@ import { Term } from "../../Services/ManagedMetadata/IManagedMetadataService";
 
 // this class writes a value to a taxonomy field
 @injectable()
-export default class ManagedMetadataFieldValueWriter extends FieldValueWriterBase {
+export class ManagedMetadataFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: IFieldInfo, value: Term): void {
         const editableRegionSelector = `[id='${fieldInfo.InternalName}_$containereditableRegion']`;
         const editableRegionInputControl = super.GetInputControl(editableRegionSelector);

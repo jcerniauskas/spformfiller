@@ -1,7 +1,7 @@
 import { INumberFieldInfo } from "./../../FieldInfo/IFieldInfo";
 import TestContainer from "../../test/inversify.config";
 import { IFieldValueWriter } from "./IFieldValueWriter";
-import NumberFieldValueWriter from "./NumberFieldValueWriter";
+import { NumberFieldValueWriter } from "./NumberFieldValueWriter";
 import { IFieldInfo, ITextFieldInfo } from "../../FieldInfo/IFieldInfo";
 
 describe("NumberFieldValueWriter", () => {

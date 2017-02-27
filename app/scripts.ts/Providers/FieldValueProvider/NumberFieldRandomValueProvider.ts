@@ -1,11 +1,11 @@
 import { IFieldInfo, INumberFieldInfo } from "./../../FieldInfo/IFieldInfo";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { injectable } from "inversify";
-import Random from "../../Utils/Random";
+import { Random } from "../../Utils/Random";
 
 // this class returns a random number adhering to the field's constraints
 @injectable()
-export default class NumberFieldRandomValueProvider implements IFieldValueProvider {
+export class NumberFieldRandomValueProvider implements IFieldValueProvider {
     public async GetRandomValue(fieldInfo: INumberFieldInfo): Promise<any> {
         let minValueToRandom = fieldInfo.MinValue;
         let maxValueToRandom = fieldInfo.MaxValue;

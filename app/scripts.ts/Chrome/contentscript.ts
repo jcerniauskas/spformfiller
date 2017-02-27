@@ -21,6 +21,6 @@ chrome.runtime.onMessage.addListener(
         });
     }
 
-    // we return true to indicate that we will send reponse asynchronously
-    sendResponse(<FillFormMessageResponse> { FormFilled : true });
+    // we send response so that background script knows we executed the action
+    sendResponse(<FillFormMessageResponse> { ActionProcessed : true });
 });

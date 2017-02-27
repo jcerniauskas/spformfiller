@@ -2,11 +2,11 @@ import { IFieldInfo, IPeopleFieldInfo } from "./../../FieldInfo/IFieldInfo";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { injectable, inject } from "inversify";
 import { IUserService, User } from "../../Services/User/IUserService";
-import Random from "../../Utils/Random";
+import { Random } from "../../Utils/Random";
 
-// this class returns a random sentence of 3 to 5 words for filling in small text fields
+// this class returns a random user from available site or group users
 @injectable()
-export default class PeopleFieldRandomValueProvider implements IFieldValueProvider {
+export class PeopleFieldRandomValueProvider implements IFieldValueProvider {
     constructor(@inject("IUserService") private _userService: IUserService) { }
 
     public async GetRandomValue(fieldInfo: IPeopleFieldInfo): Promise<any> {

@@ -6,7 +6,7 @@ import { IFieldValueWriter } from "../Providers/FieldValueWriter/IFieldValueWrit
 
 // this class gets the fields for the form and uses the type-specific value providers and value writers for each field to fill them in 
 @injectable()
-export default class FormFiller implements IFormFiller {
+export class FormFiller implements IFormFiller {
     private _valueProviderFactory: (type: string) => IFieldValueProvider;
     private _valueWriterFactory: (type: string) => IFieldValueWriter;
     private _fieldInfoGatherer: IFieldInfoGatherer;

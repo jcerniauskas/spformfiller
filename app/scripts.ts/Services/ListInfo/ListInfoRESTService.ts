@@ -1,11 +1,12 @@
 import { IListInfoService, List, ContentTypeOrder } from "./IListInfoService";
 import { ISPRestAPI } from "../../SPRestAPI/ISPRestAPI";
 import { injectable, inject } from "inversify";
-import FieldInfoConverter from "./FieldInfoConverter";
+import { FieldInfoConverter } from "./FieldInfoConverter";
 import { IFieldInfo } from "../../FieldInfo/IFieldInfo";
 
+// this is an implementation of IListInfoService which uses SharePoint's REST API to get information about fields and content types
 @injectable()
-export default class ListInfoRESTService implements IListInfoService {
+export class ListInfoRESTService implements IListInfoService {
     public constructor (@inject("ISPRestAPI") private _spRestAPI: ISPRestAPI) { }
 
     public async GetList(): Promise<List> {

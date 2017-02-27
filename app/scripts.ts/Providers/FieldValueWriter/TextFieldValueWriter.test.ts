@@ -1,6 +1,6 @@
 import TestContainer from "../../test/inversify.config";
 import { IFieldValueWriter } from "./IFieldValueWriter";
-import TextFieldValueWriter from "./TextFieldValueWriter";
+import { TextFieldValueWriter } from "./TextFieldValueWriter";
 import { IFieldInfo, ITextFieldInfo } from "../../FieldInfo/IFieldInfo";
 
 describe("TextFieldValueWriter", () => {

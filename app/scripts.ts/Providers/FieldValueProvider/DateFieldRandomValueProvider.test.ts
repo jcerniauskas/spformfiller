@@ -1,7 +1,7 @@
 import TestContainer from "../../test/inversify.config";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { IFieldInfo, IDateFieldInfo, DateFormat } from "./../../FieldInfo/IFieldInfo";
-import DateFieldRandomValueProvider from "./DateFieldRandomValueProvider";
+import { DateFieldRandomValueProvider } from "./DateFieldRandomValueProvider";
 
 describe("DateFieldRandomValueProvider", () => {
     TestContainer.snapshot();

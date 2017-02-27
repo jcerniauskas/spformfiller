@@ -1,6 +1,7 @@
 import { IFieldInfo, ITextFieldInfo, IDateFieldInfo, IChoiceFieldInfo, INumberFieldInfo, IManagedMetadataFieldInfo, IPeopleFieldInfo, DateFormat, ChoiceFormat } from "../../FieldInfo/IFieldInfo";
 
-export default class FieldInfoConverter {
+// this is a factory class for creating IFieldInfo objects from REST service response JSON
+export class FieldInfoConverter {
     public static ConvertToIFieldInfo(fieldInfoResultFromRestAPI: any): IFieldInfo {
         const baseFieldInfo = <IFieldInfo> {
                         InternalName: fieldInfoResultFromRestAPI.InternalName,

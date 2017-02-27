@@ -5,7 +5,7 @@ import { FieldValueWriterBase } from "./FieldValueWriterBase";
 
 // this class writes a value to a choice field
 @injectable()
-export default class ChoiceFieldValueWriter extends FieldValueWriterBase {
+export class ChoiceFieldValueWriter extends FieldValueWriterBase {
     public WriteValue(fieldInfo: IChoiceFieldInfo, value: any): void {
         if (fieldInfo.ChoiceFormat === ChoiceFormat.DropDown) {
             const selectField = super.GetInputControlForField(fieldInfo, "select", "$DropDownChoice");

@@ -1,6 +1,6 @@
 import TestContainer from "../../test/inversify.config";
 import { IFieldValueWriter } from "./IFieldValueWriter";
-import DateFieldValueWriter from "./DateFieldValueWriter";
+import { DateFieldValueWriter } from "./DateFieldValueWriter";
 import { IFieldInfo, IDateFieldInfo, DateFormat } from "../../FieldInfo/IFieldInfo";
 
 describe("DateFieldValueWriter", () => {
