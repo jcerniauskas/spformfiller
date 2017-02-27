@@ -4,12 +4,10 @@ import { IPageContextInformation, IPageContextExtractor } from "../PageContextIn
 
 // this is a proxy class for some of the SharePoint's REST API methods
 @injectable()
-export default class SPRestAPI implements ISPRestAPI {
-    private _pageContextInformationGatherer: IPageContextExtractor;
+export class SPRestAPI implements ISPRestAPI {
     private _pageContextInformation: IPageContextInformation;
 
-    public constructor(@inject("IPageContextExtractor") pageContextExtractor: IPageContextExtractor) {
-        this._pageContextInformationGatherer = pageContextExtractor;
+    public constructor(@inject("IPageContextExtractor") private _pageContextInformationGatherer: IPageContextExtractor) {
         this._pageContextInformation = this._pageContextInformationGatherer.GetPageContextInformation();
     }
 
@@ -18,7 +16,7 @@ export default class SPRestAPI implements ISPRestAPI {
             url: query,
             async: false,
             headers: {
-                "Accept": "application/json;odata=nometadata",
+                "Accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val()
             },
             type: "GET",
@@ -27,24 +25,38 @@ export default class SPRestAPI implements ISPRestAPI {
         return queryResult;
     }
 
-    public async GetList(): Promise<any> {
+    public GetList(): Promise<any> {
         const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + "/_api/web/lists('" + this._pageContextInformation.ListId + "')";
-        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
-
-        return queryResult;
+        return this.ReturnGenericGetQueryResult(query);
     }
 
-    public async GetListFields(): Promise<any> {
+    public GetListFields(): Promise<any> {
         const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + "/_api/web/lists('" + this._pageContextInformation.ListId + "')/fields";
-        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
-
-        return queryResult;
+        return this.ReturnGenericGetQueryResult(query);
     }
 
-    public async GetListContentTypeFields(contentTypeId: string): Promise<any> {
+    public GetListContentTypeFields(contentTypeId: string): Promise<any> {
         const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/lists('${this._pageContextInformation.ListId}')/ContentTypes('${contentTypeId}')/Fields`;
-        const queryResult: any = await this.ReturnGenericGetQueryResult(query);
+        return this.ReturnGenericGetQueryResult(query);
+    }
 
-        return queryResult;
+    public GetSiteUsers(): Promise<any> {
+        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/siteusers`;
+        return this.ReturnGenericGetQueryResult(query);
+    }
+
+    public GetGroupUsers(groupId: number): Promise<any> {
+        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/sitegroups(${groupId})/users`;
+        return this.ReturnGenericGetQueryResult(query);
+    }
+
+    public GetFolderContentTypeOrder(folderServerRelativeUrl: string): Promise<any> {
+        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/GetFolderByServerRelativeUrl('${folderServerRelativeUrl}')/ContentTypeOrder`;
+        return this.ReturnGenericGetQueryResult(query);
+    }
+
+    public GetFolderUniqueContentTypeOrder(folderServerRelativeUrl: string): Promise<any> {
+        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/GetFolderByServerRelativeUrl('${folderServerRelativeUrl}')/UniqueContentTypeOrder`;
+        return this.ReturnGenericGetQueryResult(query);
     }
 }

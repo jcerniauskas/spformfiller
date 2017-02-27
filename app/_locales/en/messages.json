@@ -1,10 +1,14 @@
 {
   "appName": {
-    "message": "SPFormFiller",
+    "message": "SharePoint Form Filler",
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "SharePoint Test Form Filler",
+    "message": "A great time-saver when testing or demonstrating SharePoint solutions. New or edit forms are filled with random context.",
     "description": "The description of the application"
+  },
+  "appPageAction": {
+    "message": "Fill-up this form!",
+    "description": "Displayed title for the page action"
   }
 }

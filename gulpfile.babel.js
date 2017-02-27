@@ -94,7 +94,7 @@ gulp.task('chromeManifest', () => {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', 'dist', 'app/scripts']));
+gulp.task('clean', del.bind(null, ['.tmp', 'dist', 'app/scripts', 'app/scripts.js']));
 
 gulp.task('watch', ['build', 'copy'], () => {
   $.livereload.listen();

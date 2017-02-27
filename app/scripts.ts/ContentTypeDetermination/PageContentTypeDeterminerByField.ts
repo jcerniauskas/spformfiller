@@ -1,8 +1,9 @@
 import { IContentTypeDeterminer, IContentTypeInformation } from "./IContentTypeInfo";
 import { injectable, inject } from "inversify";
 
+// this IContentTypeDeterminer will return a selected content type from the form's ContentTypeChoice field, if one is present
 @injectable()
-export default class PageContentTypeDeterminerByField implements IContentTypeDeterminer {
+export class PageContentTypeDeterminerByField implements IContentTypeDeterminer {
     public GetContentTypeInformation(): Promise<IContentTypeInformation> {
         // we search for field which has the id ending with "ContentTypeChoice" - this is a special field in SharePoint 2013
         const contentTypeField = $("select[id$='ContentTypeChoice']");
@@ -13,8 +14,6 @@ export default class PageContentTypeDeterminerByField implements IContentTypeDet
                 return Promise.resolve<IContentTypeInformation>({
                     // id will be in the "value" attribute
                     ContentTypeId: selectedOption.attr("value"),
-                    // and the title will be the option actual text
-                    ContentTypeTitle: selectedOption.text()
                 });
             }
         }

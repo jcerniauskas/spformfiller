@@ -5,5 +5,5 @@ export interface FillFormMessage {
 }
 
 export interface FillFormMessageResponse {
-    FormFilled: boolean;
+    ActionProcessed: boolean;
 }

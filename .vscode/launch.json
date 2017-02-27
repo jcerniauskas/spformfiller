@@ -1,0 +1,20 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Affectolithuania",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "url": "https://affectolithuania.sharepoint.com/sites/cernijusdev/SPFormFillerTest_NoCT/Forms/EditForm.aspx?ID=1&Source=https%3A%2F%2Faffectolithuania%2Esharepoint%2Ecom%2Fsites%2Fcernijusdev%2FSPFormFillerTest_NoCT%2FForms%2FAllItems%2Easpx%3FRootFolder%3D%252Fsites%252Fcernijusdev%252FSPFormFillerTest%255FNoCT&ContentTypeId=0x010100011177DD1340F247A6FCFE5DF9651CE7&RootFolder=%2Fsites%2Fcernijusdev%2FSPFormFillerTest_NoCT",
+            "webRoot": "${workspaceRoot}/app",
+            "sourceMapPathOverrides": {
+                "webpack:///./*":   "${workspaceRoot}/*"
+            },
+            "diagnosticLogging": true
+        }
+    ]
+}

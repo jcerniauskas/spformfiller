@@ -1,5 +1,5 @@
 import TestContainer from "../test/inversify.config";
-import SPFormUrlMatcher from "./SPFormUrlMatcher";
+import { SPFormUrlMatcher } from "./SPFormUrlMatcher";
 import { IChromeChangeEventInfo, IPageVisibilityHandler } from "./IPageVisibilityHandler";
 
 describe("SPFormUrlMatcher", () => {

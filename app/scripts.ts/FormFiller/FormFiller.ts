@@ -1,19 +1,19 @@
 import { IFormFiller } from "./IFormFiller";
 import { injectable, inject } from "inversify";
 import { IFieldInfo, IFieldInfoGatherer } from "../FieldInfo/IFieldInfo";
-import { IValueProvider } from "../ValueProvider/IValueProvider";
-import { IValueWriter } from "../ValueWriter/IValueWriter";
+import { IFieldValueProvider } from "../Providers/FieldValueProvider/IFieldValueProvider";
+import { IFieldValueWriter } from "../Providers/FieldValueWriter/IFieldValueWriter";
 
 // this class gets the fields for the form and uses the type-specific value providers and value writers for each field to fill them in 
 @injectable()
-export default class FormFiller implements IFormFiller {
-    private _valueProviderFactory: (type: string) => IValueProvider;
-    private _valueWriterFactory: (type: string) => IValueWriter;
+export class FormFiller implements IFormFiller {
+    private _valueProviderFactory: (type: string) => IFieldValueProvider;
+    private _valueWriterFactory: (type: string) => IFieldValueWriter;
     private _fieldInfoGatherer: IFieldInfoGatherer;
 
     public constructor (
-        @inject("Factory<IValueProvider>") valueProviderFactory: (type: string) => IValueProvider,
-        @inject("Factory<IValueWriter>") valueWriterFactory: (type: string) => IValueWriter,
+        @inject("Factory<IFieldValueProvider>") valueProviderFactory: (type: string) => IFieldValueProvider,
+        @inject("Factory<IFieldValueWriter>") valueWriterFactory: (type: string) => IFieldValueWriter,
         @inject("IFieldInfoGatherer") fieldInfoGatherer: IFieldInfoGatherer
     ) {
         this._valueProviderFactory = valueProviderFactory;
@@ -28,8 +28,18 @@ export default class FormFiller implements IFormFiller {
             const valueWriter = this._valueWriterFactory(fieldInfo.Type);
 
             if (valueProvider && valueWriter) {
-                const fieldValue = await valueProvider.GetRandomValue();
-                valueWriter.WriteValue(fieldInfo, fieldValue);
+                let fieldValue: any;
+                try {
+                    fieldValue = await valueProvider.GetRandomValue(fieldInfo);
+                } catch (e) {
+                    console.log(`Getting field value failed for field '${fieldInfo.Title}'. Error message: ${e}`);
+                }
+
+                try {
+                    valueWriter.WriteValue(fieldInfo, fieldValue);
+                } catch (e) {
+                    console.log(`Writing field value failed for field '${fieldInfo.Title}'. Error message: ${e}`);
+                }
             }
         }
     }
