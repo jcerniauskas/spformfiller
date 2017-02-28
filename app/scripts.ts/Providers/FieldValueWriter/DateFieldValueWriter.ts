@@ -1,17 +1,23 @@
 import { IFieldValueWriter } from "./IFieldValueWriter";
 import { IFieldInfo, IDateFieldInfo, DateFormat } from "../../FieldInfo/IFieldInfo";
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
 import { FieldValueWriterBase } from "./FieldValueWriterBase";
+import { IDateFormatService } from "../../Services/DateFormat/IDateFormatService";
 
 // this class writes a value to a date field
 @injectable()
 export class DateFieldValueWriter extends FieldValueWriterBase {
-    public WriteValue(fieldInfo: IDateFieldInfo, value: any): void {
+    constructor(@inject("IDateFormatService") private _dateFormatService: IDateFormatService) {
+        super();
+    }
+
+    public async WriteValue(fieldInfo: IDateFieldInfo, value: any): Promise<void> {
         const dateInputField = super.GetInputControlForField(fieldInfo, "input", "$DateTimeFieldDate");
 
         const dateValue = <Date>value;
         // TODO: test for regional settings effect
-        const formattedValue = `${dateValue.getMonth() + 1}/${dateValue.getDate()}/${dateValue.getFullYear()}`;
+        //const formattedValue = `${dateValue.getMonth() + 1}/${dateValue.getDate()}/${dateValue.getFullYear()}`;
+        const formattedValue = await this._dateFormatService.GetFormattedDate(dateValue);
         dateInputField.val(formattedValue);
 
         // check if this is a Date + Time field

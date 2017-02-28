@@ -21,6 +21,8 @@ import { IUserService } from "./Services/User/IUserService";
 import { UserRESTService } from "./Services/User/UserRESTService";
 import { IListInfoService } from "./Services/ListInfo/IListInfoService";
 import { ListInfoRESTService } from "./Services/ListInfo/ListInfoRESTService";
+import { IDateFormatService } from "./Services/DateFormat/IDateFormatService";
+import { DateFormatServiceCSOM } from "./Services/DateFormat/DateFormatServiceCSOM";
 
 import { IFieldValueProvider } from "./Providers/FieldValueProvider/IFieldValueProvider";
 import { TextFieldRandomValueProvider } from "./Providers/FieldValueProvider/TextFieldRandomValueProvider";
@@ -56,6 +58,7 @@ kernel2013.bind<IFormFiller>("IFormFiller").to(FormFiller).inSingletonScope();
 kernel2013.bind<IManagedMetadataService>("IManagedMetadataService").to(ManagedMetadataService).inSingletonScope();
 kernel2013.bind<IUserService>("IUserService").to(UserRESTService).inSingletonScope();
 kernel2013.bind<IListInfoService>("IListInfoService").to(ListInfoRESTService).inSingletonScope();
+kernel2013.bind<IDateFormatService>("IDateFormatService").to(DateFormatServiceCSOM).inSingletonScope();
 
 // bind value providers and value writers to their field types
 kernel2013.bind<IFieldValueProvider>("IFieldValueProvider").to(TextFieldRandomValueProvider).inSingletonScope().whenTargetNamed("Text");

@@ -30,10 +30,14 @@ export class CompositePageContentTypeDeterminer implements IContentTypeDetermine
 
             // first try checking if the current folder has UniqueContentTypeOrder set
             const pageContextInfo = this._pageContextExtractor.GetPageContextInformation();
-            let contentTypeOrder = await this._listInfoService.GetFolderUniqueContentTypeOrder(pageContextInfo.FolderUrl);
+            let folderUrl = pageContextInfo.FolderUrl;
+            if (!folderUrl) {
+                folderUrl = pageContextInfo.ListServerRelativeUrl;
+            }
+            let contentTypeOrder = await this._listInfoService.GetFolderUniqueContentTypeOrder(folderUrl);
             if (!contentTypeOrder) {
                 // if it doesn't have a unique content type order set then try the normal content type order
-                contentTypeOrder = await this._listInfoService.GetFolderContentTypeOrder(pageContextInfo.FolderUrl);
+                contentTypeOrder = await this._listInfoService.GetFolderContentTypeOrder(folderUrl);
             }
 
             // if it only has one unique content type order then return that one
@@ -43,10 +47,19 @@ export class CompositePageContentTypeDeterminer implements IContentTypeDetermine
                 };
             }
 
-            // if we have more than one content type in the order then try using ContentTypeId from the query string
-            return <IContentTypeInformation> {
-                ContentTypeId: pageContextInfo.ContentTypeId,
-            };
+            // if we have more than one content type in the order then try using ContentTypeId from the query string, if it is specified
+            if (pageContextInfo.ContentTypeId) {
+                return <IContentTypeInformation> {
+                    ContentTypeId: pageContextInfo.ContentTypeId,
+                };
+            }
+
+            // lastly try taking the first (default) content type if we got any from the content type order
+            if (contentTypeOrder && contentTypeOrder.ContentTypeIds && contentTypeOrder.ContentTypeIds.length > 1) {
+                return <IContentTypeInformation> {
+                    ContentTypeId: contentTypeOrder.ContentTypeIds[0],
+                };
+            }
         }
     }
 }
