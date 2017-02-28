@@ -28,14 +28,7 @@ module.exports = {
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             { test: /\.ts$/, use: ["awesome-typescript-loader"] },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { test: /\.js$/, enforce: "pre", use: ["source-map-loader"] },
-            // Linter for TS
-            { test: /\.ts$/, enforce: "pre", use: ["tslint-loader"] }
+            { test: /\.js$/, enforce: "pre", use: ["source-map-loader"] }
         ]
-    },
-
-    // tslint: {
-    //     emitErrors: true,
-    //     failOnHint: true
-    // }
+    }
 };

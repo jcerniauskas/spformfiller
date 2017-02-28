@@ -2,11 +2,12 @@ import TestContainer from "../../test/inversify.config";
 import { IFieldValueProvider } from "./IFieldValueProvider";
 import { IFieldInfo, IDateFieldInfo, DateFormat } from "./../../FieldInfo/IFieldInfo";
 import { DateFieldRandomValueProvider } from "./DateFieldRandomValueProvider";
+import { IDateValue } from "../ValueTypes/IDateValue";
 
 describe("DateFieldRandomValueProvider", () => {
     TestContainer.snapshot();
 
-    const randomValues = new Array<Date>(100).fill(new Date(1970, 0, 1));
+    const randomValues = new Array<IDateValue>(100).fill(<IDateValue>{ Date: new Date(1970, 0, 1), FormattedDate: "1/1/1970" });
 
     const dateFieldValueProvider = TestContainer.bindAndGetSpecificInstance<IFieldValueProvider>("IFieldValueProvider", DateFieldRandomValueProvider);
 
@@ -20,14 +21,14 @@ describe("DateFieldRandomValueProvider", () => {
                     };
         // try running this for 100 times to try out more random values
         for (let i in randomValues) {
-            randomValues[i] = <Date>await dateFieldValueProvider.GetRandomValue(dateFieldInfo);
+            randomValues[i] = <IDateValue>await dateFieldValueProvider.GetRandomValue(dateFieldInfo);
         }
         done();
     });
 
     it("should round the time to 5 minutes", () => {
         for (let randomDate of randomValues) {
-            expect(randomDate.getMinutes() % 5).toEqual(0); 
+            expect(randomDate.Date.getMinutes() % 5).toEqual(0); 
         }
     });
 

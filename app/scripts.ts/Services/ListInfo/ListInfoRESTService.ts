@@ -27,13 +27,17 @@ export class ListInfoRESTService implements IListInfoService {
     }
 
     public async GetFolderContentTypeOrder(folderServerRelativeUrl: string): Promise<ContentTypeOrder> {
-        const folderQueryResult = await this._spRestAPI.GetFolderUniqueContentTypeOrder(folderServerRelativeUrl);
-        return ListInfoRESTService.ConvertRESTCTOrderResult(folderQueryResult.d.UniqueContentTypeOrder);
+        const folderQueryResult = await this._spRestAPI.GetFolderContentTypeOrder(folderServerRelativeUrl);
+        if (folderQueryResult && folderQueryResult.d.ContentTypeOrder && folderQueryResult.d.ContentTypeOrder.results) {
+            return ListInfoRESTService.ConvertRESTCTOrderResult(folderQueryResult.d.ContentTypeOrder.results);
+        }
     }
 
     public async GetFolderUniqueContentTypeOrder(folderServerRelativeUrl: string): Promise<ContentTypeOrder> {
         const folderQueryResult = await this._spRestAPI.GetFolderUniqueContentTypeOrder(folderServerRelativeUrl);
-        return ListInfoRESTService.ConvertRESTCTOrderResult(folderQueryResult.d.ContentTypeOrder);
+        if (folderQueryResult && folderQueryResult.d.UniqueContentTypeOrder && folderQueryResult.d.UniqueContentTypeOrder.results) {
+            return ListInfoRESTService.ConvertRESTCTOrderResult(folderQueryResult.d.UniqueContentTypeOrder.results);
+        }
     }
 
     private static ConvertRESTCTOrderResult(results: any): ContentTypeOrder {

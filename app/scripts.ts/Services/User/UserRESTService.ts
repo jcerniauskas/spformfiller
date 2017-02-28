@@ -44,12 +44,10 @@ export class UserRESTService implements IUserService {
     }
 
     private static FilterSystemUsers(users: User[]): User[] {
-        const usersWithTitlesToIgnore = ["Everyone", "Everyone except external users", "NT AUTHORITY\\authenticated users"];
-
         return users
             .filter(user => user.Id < 1000000000) // users with IDs over that are system users
-            .filter(user => usersWithTitlesToIgnore.indexOf(user.Title) === -1) // there are a few exceptions we need to ignore
-            .filter(user => !user.Title.startsWith("_spocrawler_")) // also ignore any users which titles start with "_spocrawler_" - this is some kind of SharePoint Online crawler account
+            .filter(user => !user.LoginName.startsWith("c:0")) // there are a few exceptions we need to ignore - some of the "special" accounts start with "c:0"
+            .filter(user => user.Title.indexOf("_spocrawler_") === -1) // also ignore any users which titles contain "_spocrawler_" - this is some kind of SharePoint Online crawler account
             ;
     }
 }

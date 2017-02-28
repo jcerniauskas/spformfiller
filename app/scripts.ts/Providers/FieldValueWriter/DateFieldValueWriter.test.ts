@@ -2,11 +2,13 @@ import TestContainer from "../../test/inversify.config";
 import { IFieldValueWriter } from "./IFieldValueWriter";
 import { DateFieldValueWriter } from "./DateFieldValueWriter";
 import { IFieldInfo, IDateFieldInfo, DateFormat } from "../../FieldInfo/IFieldInfo";
+import { IDateValue } from "../ValueTypes/IDateValue";
 
 describe("DateFieldValueWriter", () => {
     TestContainer.snapshot();
 
     const testDate = new Date(2017, 1, 11, 18, 5, 58, 187);
+    const testDateValue = <IDateValue> { Date: testDate, FormattedDate: "2/11/2017" };
     const dateFieldValueWriter = TestContainer.bindAndGetSpecificInstance<IFieldValueWriter>("IFieldValueWriter", DateFieldValueWriter);
 
     it("should fill date field with date value", () => {
@@ -19,7 +21,7 @@ describe("DateFieldValueWriter", () => {
                         DateFormat: DateFormat.DateOnly,
                     };
 
-        dateFieldValueWriter.WriteValue(dateFieldInfo, testDate);
+        dateFieldValueWriter.WriteValue(dateFieldInfo, testDateValue);
         let elem = $("input[id='SPF_x0020_Date_745b568b-f30f-4f21-b913-61a2adbe2e94_$DateTimeFieldDate']");
         expect(elem).toHaveValue("2/11/2017");
     });
@@ -34,7 +36,7 @@ describe("DateFieldValueWriter", () => {
                         DateFormat: DateFormat.DateAndTime,
                     };
 
-        dateFieldValueWriter.WriteValue(dateAndTimeFieldInfo, testDate);
+        dateFieldValueWriter.WriteValue(dateAndTimeFieldInfo, testDateValue);
         expect($("input[id='SPF_x0020_Date_x0020_time_dfa5fdf4-a2ac-48db-8b0b-987dfedc4ade_$DateTimeFieldDate']")).toHaveValue("2/11/2017");
         expect($("select[id='SPF_x0020_Date_x0020_time_dfa5fdf4-a2ac-48db-8b0b-987dfedc4ade_$DateTimeFieldDateHours']")).toHaveValue("18");
         expect($("select[id='SPF_x0020_Date_x0020_time_dfa5fdf4-a2ac-48db-8b0b-987dfedc4ade_$DateTimeFieldDateMinutes']")).toHaveValue("05");

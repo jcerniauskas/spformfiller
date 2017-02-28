@@ -5,6 +5,8 @@ import { MockSPRestAPI as MockSPRestAPINoContentTypes } from "../SPRestAPI/test/
 import { ContainerExtensions } from "./ContainerExtensions";
 import { IManagedMetadataService } from "./../Services/ManagedMetadata/IManagedMetadataService";
 import { MockManagedMetadataService } from "../Services/ManagedMetadata/test/MockManagedMetadataService";
+import { IDateFormatService } from "../Services/DateFormat/IDateFormatService";
+import { MockDateFormatService } from "../Services/DateFormat/MockDateFormatService";
 
 // this sets up the inversify container for running tests. For example, some interfaces are immediately mocked.
 
@@ -13,6 +15,8 @@ testContainer.unbind("ISPRestAPI");
 testContainer.bind<ISPRestAPI>("ISPRestAPI").to(MockSPRestAPINoContentTypes);
 testContainer.unbind("IManagedMetadataService");
 testContainer.bind<IManagedMetadataService>("IManagedMetadataService").to(MockManagedMetadataService).inSingletonScope();
+testContainer.unbind("IDateFormatService");
+testContainer.bind<IDateFormatService>("IDateFormatService").to(MockDateFormatService).inSingletonScope();
 
 // we also add some additional helper methods for the test container
 export default ContainerExtensions.ExtendContainer(testContainer);
