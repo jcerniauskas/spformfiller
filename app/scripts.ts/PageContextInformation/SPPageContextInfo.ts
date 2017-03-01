@@ -10,8 +10,7 @@ export class SPPageContextInfo implements IPageContextExtractor {
             WebServerRelativeUrl: _spPageContextInfo.webServerRelativeUrl,
             ListId: _spPageContextInfo.pageListId,
             FolderUrl: <string>SPPageContextInfo.GetQueryStringParam("RootFolder"),
-            ContentTypeId: <string>SPPageContextInfo.GetQueryStringParam("ContentTypeId"),
-            ListServerRelativeUrl: _spPageContextInfo["listUrl"] // a quick hack, because the current @types definition does not contain this property
+            ContentTypeId: <string>SPPageContextInfo.GetQueryStringParam("ContentTypeId")
         };
     }
 

@@ -7,5 +7,4 @@ export interface IPageContextInformation {
     ListId: string;
     FolderUrl: string;
     ContentTypeId: string;
-    ListServerRelativeUrl: string;
 }
