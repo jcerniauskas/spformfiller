@@ -50,13 +50,23 @@ export class SPRestAPI implements ISPRestAPI {
         return this.ReturnGenericGetQueryResult(query);
     }
 
-    public GetFolderContentTypeOrder(folderServerRelativeUrl: string): Promise<any> {
-        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/GetFolderByServerRelativeUrl('${folderServerRelativeUrl}')/ContentTypeOrder`;
+    public GetFolderContentTypeOrder(folderServerRelativeUrl?: string): Promise<any> {
+        // below is a query to get the content type order from root folder
+        let query: string =  this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/lists('${this._pageContextInformation.ListId}')/rootfolder/ContentTypeOrder`;
+        if (folderServerRelativeUrl) {
+            // if, however, folder URL is specified, then we need to use a different query to get the content type order from that folder
+            query = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/GetFolderByServerRelativeUrl('${folderServerRelativeUrl}')/ContentTypeOrder`;
+        }
         return this.ReturnGenericGetQueryResult(query);
     }
 
-    public GetFolderUniqueContentTypeOrder(folderServerRelativeUrl: string): Promise<any> {
-        const query: string = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/GetFolderByServerRelativeUrl('${folderServerRelativeUrl}')/UniqueContentTypeOrder`;
+    public GetFolderUniqueContentTypeOrder(folderServerRelativeUrl?: string): Promise<any> {
+        // below is a query to get the unique content type order from root folder
+        let query: string =  this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/lists('${this._pageContextInformation.ListId}')/rootfolder/UniqueContentTypeOrder`;
+        if (folderServerRelativeUrl) {
+            // if, however, folder URL is specified, then we need to use a different query to get the unique content type order from that folder
+            query = this._pageContextInformation.WebServerRelativeUrl.replace(/\/$/, "") + `/_api/web/GetFolderByServerRelativeUrl('${folderServerRelativeUrl}')/UniqueContentTypeOrder`;
+        }
         return this.ReturnGenericGetQueryResult(query);
     }
 }

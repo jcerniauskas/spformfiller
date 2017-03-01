@@ -30,10 +30,7 @@ export class CompositePageContentTypeDeterminer implements IContentTypeDetermine
 
             // first try checking if the current folder has UniqueContentTypeOrder set
             const pageContextInfo = this._pageContextExtractor.GetPageContextInformation();
-            let folderUrl = pageContextInfo.FolderUrl;
-            if (!folderUrl) {
-                folderUrl = pageContextInfo.ListServerRelativeUrl;
-            }
+            const folderUrl = pageContextInfo.FolderUrl;    // this might be null, but listInfoService will then query the root folder
             let contentTypeOrder = await this._listInfoService.GetFolderUniqueContentTypeOrder(folderUrl);
             if (!contentTypeOrder) {
                 // if it doesn't have a unique content type order set then try the normal content type order
