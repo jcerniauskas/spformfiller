@@ -26,14 +26,14 @@ export class ListInfoRESTService implements IListInfoService {
         return fieldsQueryResult.d.results.map(fieldInfoResult => FieldInfoConverter.ConvertToIFieldInfo(fieldInfoResult));
     }
 
-    public async GetFolderContentTypeOrder(folderServerRelativeUrl: string): Promise<ContentTypeOrder> {
+    public async GetFolderContentTypeOrder(folderServerRelativeUrl?: string): Promise<ContentTypeOrder> {
         const folderQueryResult = await this._spRestAPI.GetFolderContentTypeOrder(folderServerRelativeUrl);
         if (folderQueryResult && folderQueryResult.d.ContentTypeOrder && folderQueryResult.d.ContentTypeOrder.results) {
             return ListInfoRESTService.ConvertRESTCTOrderResult(folderQueryResult.d.ContentTypeOrder.results);
         }
     }
 
-    public async GetFolderUniqueContentTypeOrder(folderServerRelativeUrl: string): Promise<ContentTypeOrder> {
+    public async GetFolderUniqueContentTypeOrder(folderServerRelativeUrl?: string): Promise<ContentTypeOrder> {
         const folderQueryResult = await this._spRestAPI.GetFolderUniqueContentTypeOrder(folderServerRelativeUrl);
         if (folderQueryResult && folderQueryResult.d.UniqueContentTypeOrder && folderQueryResult.d.UniqueContentTypeOrder.results) {
             return ListInfoRESTService.ConvertRESTCTOrderResult(folderQueryResult.d.UniqueContentTypeOrder.results);
